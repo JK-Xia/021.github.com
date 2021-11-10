@@ -6,7 +6,7 @@
   <link href="http://www.010101.cc/atom.xml" rel="self"/>
   
   <link href="http://www.010101.cc/"/>
-  <updated>2021-11-10T02:22:52.255Z</updated>
+  <updated>2021-11-10T06:47:16.216Z</updated>
   <id>http://www.010101.cc/</id>
   
   <author>
@@ -15,6 +15,73 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>win32 之 PE文件结构笔记</title>
+    <link href="http://www.010101.cc/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/"/>
+    <id>http://www.010101.cc/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/</id>
+    <published>2021-11-10T06:44:58.000Z</published>
+    <updated>2021-11-10T06:47:16.216Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="PE文件结构"><a href="#PE文件结构" class="headerlink" title="PE文件结构"></a>PE文件结构</h1><ul><li><p>Windows : PE (Portable Excuteable) 文件结构</p></li><li><p>Linux : ELF(Executable and linking formate) 文件结构</p></li></ul><h4 id="PE-文件特征和格式"><a href="#PE-文件特征和格式" class="headerlink" title="PE 文件特征和格式"></a>PE 文件特征和格式</h4><ul><li>执行二进制文件转16进制后，前2个字节是MZ, 3C位置值，再往下找3C位置的字节值会显示PE. 可判定为PE.</li></ul><h4 id="PE文件结构排列"><a href="#PE文件结构排列" class="headerlink" title="PE文件结构排列"></a>PE文件结构排列</h4><p><code>DOS + PE文件头 + 字表 + 字节数</code></p><p><img src="https://www.pianshen.com/images/785/9b4600340cb22b586c8e7f22c6573e31.png" alt="PE文件分析- 程序员大本营"></p><h5 id="dos文件头"><a href="#dos文件头" class="headerlink" title="dos文件头"></a>dos文件头</h5><ul><li>MZ头 ：64byte + 20byte PE_header + 节表section_header 40byte + option_header 224byte节数据</li></ul><h5 id="内存拉升："><a href="#内存拉升：" class="headerlink" title="内存拉升："></a>内存拉升：</h5><ul><li>PE文件在硬盘中200倍拉升， 在内存中1000倍拉升，空间扩充.</li></ul><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1xavystj31bx0u0juo.jpg" alt="image-20211109124840719"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;PE文件结构&quot;&gt;&lt;a href=&quot;#PE文件结构&quot; class=&quot;headerlink&quot; title=&quot;PE文件结构&quot;&gt;&lt;/a&gt;PE文件结构&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Windows : PE (Portable Excuteable) 文件结构&lt;/p&gt;
+&lt;</summary>
+      
+    
+    
+    
+    <category term="操作系统内核" scheme="http://www.010101.cc/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/"/>
+    
+    
+    <category term="PE可执行文件" scheme="http://www.010101.cc/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>线程切换之内核E_thead浅析</title>
+    <link href="http://www.010101.cc/2021/11/10/E_Thread/"/>
+    <id>http://www.010101.cc/2021/11/10/E_Thread/</id>
+    <published>2021-11-10T06:44:58.000Z</published>
+    <updated>2021-11-10T06:46:07.691Z</updated>
+    
+    <content type="html"><![CDATA[<p>Wirte by 021.</p><h2 id="E-Thread"><a href="#E-Thread" class="headerlink" title="E_Thread"></a>E_Thread</h2><ul><li>线程结构体</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">结构体</span><br><span class="line">&#123;</span><br><span class="line">线程名称</span><br><span class="line">线程状态</span><br><span class="line"></span><br><span class="line">堆栈起始地址</span><br><span class="line">线程堆栈界限 （终止地址）</span><br><span class="line">线程当前位置 ESP</span><br><span class="line"></span><br><span class="line">线程函数参数</span><br><span class="line">线程函数地址</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">线程结构体数组</span><br><span class="line"></span><br><span class="line">0 --- 当前线程 ，main</span><br><span class="line"></span><br><span class="line">1 --- 创建的新线程</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><p>线程状态不同存储</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正在运行线程 --- kpcr</span><br><span class="line"></span><br><span class="line">等待线程 --- 等待链表</span><br><span class="line"></span><br><span class="line">就绪/调度线程 --- 32个链表</span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><h3 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h3><ul><li><p>创建 — 初始化线程堆栈</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1，结构体初始化赋值</span><br><span class="line"></span><br><span class="line">2，执行体，函数，参数，赋值</span><br><span class="line"></span><br><span class="line">3，创建堆栈，申请堆栈 stackpage , 0x80000 大小，</span><br><span class="line"></span><br><span class="line">4，堆栈初始化，起始地址、</span><br><span class="line"></span><br><span class="line">5，设定堆栈边界值（终止地址）</span><br><span class="line"></span><br><span class="line">6， 入栈</span><br><span class="line"></span><br><span class="line">7, kernelStack 栈顶 赋值，esp 赋值。</span><br><span class="line">kernelStack = 入栈对象 （1-6）</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><ul><li><p>线程调度</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure></li></ul><h3 id="线程切换-SwapContext"><a href="#线程切换-SwapContext" class="headerlink" title="线程切换 SwapContext"></a>线程切换 SwapContext</h3><ul><li>线程不是被动切换，而是主动切换。 意思是，无论是时间片到了的被动切换，还是线程IO阻塞主动出让执行权，都需要当前线程调用切换线程函数.</li><li>线程没有使用TSS保存寄存器，而是使用堆栈.</li><li>线程切换过程就是堆栈切换过程.</li><li>在线程切换过程中，会判断2个线程是否属于同一个进程，如果不是，就切换cr3页面，也就是进程空间也切换了.</li></ul><p>​        <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1nx9qgvj30qm0fu753.jpg" alt="image-20211110115259985"></p><ul><li><p>TheadSwap</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数 ： 1，当前线程(esp)地址， 2，将要被切换线程(edi)地址</span><br><span class="line"></span><br><span class="line">步骤： </span><br><span class="line">1，保存当前线的栈顶，上图的push操作.</span><br><span class="line">2，将当前线程（esp）地址，存储到KernelStack中 ---  mov [esi kernelStack] ,esp</span><br><span class="line">3，将内核中 将要被切换edi线程 的地址，交换到当前位置 ---  mov esp, [edi kernelStack]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li><p>主动切换</p><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1odurnyj30zr0g4774.jpg" alt="image-20211110123138625"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">取出当前CPU kpcr正在执行的线程放到edi中</span><br></pre></td></tr></table></figure></li></ul><h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><ul><li><p>时钟中断</p><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1ogwzuej30tp0d7q3x.jpg" alt="image-20211110132601818"></p><ul><li><p>中断条件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.时间片到期</span><br><span class="line">2，备用线程（KPCR.PrcbData.nextThread）</span><br></pre></td></tr></table></figure></li><li><p>CPU时间片</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1，KPROCESS.ThreadQuantum 值是当前进程设置的时间片值</span><br><span class="line">2，_KTHREAD.ThreadQuantum 会读取 KPROCESS.ThreadQuantum的值，在线程初始化的时候</span><br><span class="line"></span><br><span class="line">在win32里面初始为6,每次中断会调用KeupdateRuntime函数会将当前线程_KTHREAD.ThreadQuantum - 3，如果减到0，则将</span><br><span class="line">KPCR.PrcbData.QuantumEnd 位 置为 非0，表示当前线程时间片到期.</span><br></pre></td></tr></table></figure></li></ul></li><li><p>Tss</p><ul><li><p>内核堆栈</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initStack 栈底</span><br><span class="line">kernelStack 栈顶</span><br><span class="line">stackLimte 边界</span><br><span class="line"></span><br><span class="line">TSS.esp0得到当前线程0环堆栈，线程在切换的时候保证0环线程堆栈的唯一和有序性.</span><br></pre></td></tr></table></figure></li></ul></li></ul><ul><li><p>异常中断</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INT N， 页面异常</span><br></pre></td></tr></table></figure></li><li><p>如何永久占用CPU?</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">满足 不调用API , 并且不会出现异常，并调用cli指令，屏蔽时间中断，CPU就会忽略时钟片中断.</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Wirte by 021.&lt;/p&gt;
+&lt;h2 id=&quot;E-Thread&quot;&gt;&lt;a href=&quot;#E-Thread&quot; class=&quot;headerlink&quot; title=&quot;E_Thread&quot;&gt;&lt;/a&gt;E_Thread&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;线程结构体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;f</summary>
+      
+    
+    
+    
+    <category term="操作系统内核" scheme="http://www.010101.cc/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/"/>
+    
+    
+    <category term="进程&amp;线程" scheme="http://www.010101.cc/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://www.010101.cc/2021/11/10/test/"/>
+    <id>http://www.010101.cc/2021/11/10/test/</id>
+    <published>2021-11-10T06:43:53.000Z</published>
+    <updated>2021-11-10T06:43:53.286Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>CPU内核模块之KPCR</title>
@@ -37,34 +104,6 @@
     
     
     <category term="测试标签" scheme="http://www.010101.cc/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线程切换之内核E_thead浅析</title>
-    <link href="http://www.010101.cc/2021/11/08/E_Thread/"/>
-    <id>http://www.010101.cc/2021/11/08/E_Thread/</id>
-    <published>2021-11-08T14:23:44.689Z</published>
-    <updated>2021-11-10T06:38:08.853Z</updated>
-    
-    <content type="html"><![CDATA[<p>Wirte by 021.</p><h2 id="E-Thread"><a href="#E-Thread" class="headerlink" title="E_Thread"></a>E_Thread</h2><ul><li>线程结构体</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">结构体</span><br><span class="line">&#123;</span><br><span class="line">线程名称</span><br><span class="line">线程状态</span><br><span class="line"></span><br><span class="line">堆栈起始地址</span><br><span class="line">线程堆栈界限 （终止地址）</span><br><span class="line">线程当前位置 ESP</span><br><span class="line"></span><br><span class="line">线程函数参数</span><br><span class="line">线程函数地址</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">线程结构体数组</span><br><span class="line"></span><br><span class="line">0 --- 当前线程 ，main</span><br><span class="line"></span><br><span class="line">1 --- 创建的新线程</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><p>线程状态不同存储</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正在运行线程 --- kpcr</span><br><span class="line"></span><br><span class="line">等待线程 --- 等待链表</span><br><span class="line"></span><br><span class="line">就绪/调度线程 --- 32个链表</span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><h3 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h3><ul><li><p>创建 — 初始化线程堆栈</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1，结构体初始化赋值</span><br><span class="line"></span><br><span class="line">2，执行体，函数，参数，赋值</span><br><span class="line"></span><br><span class="line">3，创建堆栈，申请堆栈 stackpage , 0x80000 大小，</span><br><span class="line"></span><br><span class="line">4，堆栈初始化，起始地址、</span><br><span class="line"></span><br><span class="line">5，设定堆栈边界值（终止地址）</span><br><span class="line"></span><br><span class="line">6， 入栈</span><br><span class="line"></span><br><span class="line">7, kernelStack 栈顶 赋值，esp 赋值。</span><br><span class="line">kernelStack = 入栈对象 （1-6）</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li></ul><ul><li><p>线程调度</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure></li></ul><h3 id="线程切换-SwapContext"><a href="#线程切换-SwapContext" class="headerlink" title="线程切换 SwapContext"></a>线程切换 SwapContext</h3><ul><li>线程不是被动切换，而是主动切换。 意思是，无论是时间片到了的被动切换，还是线程IO阻塞主动出让执行权，都需要当前线程调用切换线程函数.</li><li>线程没有使用TSS保存寄存器，而是使用堆栈.</li><li>线程切换过程就是堆栈切换过程.</li><li>在线程切换过程中，会判断2个线程是否属于同一个进程，如果不是，就切换cr3页面，也就是进程空间也切换了.</li></ul><p>​        <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1nx9qgvj30qm0fu753.jpg" alt="image-20211110115259985"></p><ul><li><p>TheadSwap</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数 ： 1，当前线程(esp)地址， 2，将要被切换线程(edi)地址</span><br><span class="line"></span><br><span class="line">步骤： </span><br><span class="line">1，保存当前线的栈顶，上图的push操作.</span><br><span class="line">2，将当前线程（esp）地址，存储到KernelStack中 ---  mov [esi kernelStack] ,esp</span><br><span class="line">3，将内核中 将要被切换edi线程 的地址，交换到当前位置 ---  mov esp, [edi kernelStack]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li><p>主动切换</p><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1odurnyj30zr0g4774.jpg" alt="image-20211110123138625"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">取出当前CPU kpcr正在执行的线程放到edi中</span><br></pre></td></tr></table></figure></li></ul><h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><ul><li><p>时钟中断</p><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1ogwzuej30tp0d7q3x.jpg" alt="image-20211110132601818"></p><ul><li><p>中断条件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.时间片到期</span><br><span class="line">2，备用线程（KPCR.PrcbData.nextThread）</span><br></pre></td></tr></table></figure></li><li><p>CPU时间片</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1，KPROCESS.ThreadQuantum 值是当前进程设置的时间片值</span><br><span class="line">2，_KTHREAD.ThreadQuantum 会读取 KPROCESS.ThreadQuantum的值，在线程初始化的时候</span><br><span class="line"></span><br><span class="line">在win32里面初始为6,每次中断会调用KeupdateRuntime函数会将当前线程_KTHREAD.ThreadQuantum - 3，如果减到0，则将</span><br><span class="line">KPCR.PrcbData.QuantumEnd 位 置为 非0，表示当前线程时间片到期.</span><br></pre></td></tr></table></figure></li></ul></li><li><p>Tss</p><ul><li><p>内核堆栈</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initStack 栈底</span><br><span class="line">kernelStack 栈顶</span><br><span class="line">stackLimte 边界</span><br><span class="line"></span><br><span class="line">TSS.esp0得到当前线程0环堆栈，线程在切换的时候保证0环线程堆栈的唯一和有序性.</span><br></pre></td></tr></table></figure></li></ul></li></ul><ul><li><p>异常中断</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INT N， 页面异常</span><br></pre></td></tr></table></figure></li><li><p>如何永久占用CPU?</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">满足 不调用API , 并且不会出现异常，并调用cli指令，屏蔽时间中断，CPU就会忽略时钟片中断.</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Wirte by 021.&lt;/p&gt;
-&lt;h2 id=&quot;E-Thread&quot;&gt;&lt;a href=&quot;#E-Thread&quot; class=&quot;headerlink&quot; title=&quot;E_Thread&quot;&gt;&lt;/a&gt;E_Thread&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;线程结构体&lt;/li&gt;
-&lt;/ul&gt;
-&lt;f</summary>
-      
-    
-    
-    
-    <category term="操作系统内核" scheme="http://www.010101.cc/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/"/>
-    
-    
-    <category term="操作系统内核" scheme="http://www.010101.cc/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/"/>
     
   </entry>
   
@@ -133,30 +172,6 @@
     
     
     <category term="工具使用" scheme="http://www.010101.cc/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>win32 之 PE文件结构.</title>
-    <link href="http://www.010101.cc/2021/11/08/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/"/>
-    <id>http://www.010101.cc/2021/11/08/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/</id>
-    <published>2021-11-08T14:04:58.000Z</published>
-    <updated>2021-11-09T04:50:00.944Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="PE文件结构"><a href="#PE文件结构" class="headerlink" title="PE文件结构"></a>PE文件结构</h1><ul><li><p>Windows : PE (Portable Excuteable) 文件结构</p></li><li><p>Linux : ELF(Executable and linking formate) 文件结构</p></li></ul><h4 id="PE-文件特征和格式"><a href="#PE-文件特征和格式" class="headerlink" title="PE 文件特征和格式"></a>PE 文件特征和格式</h4><ul><li>执行二进制文件转16进制后，前2个字节是MZ, 3C位置值，再往下找3C位置的字节值会显示PE. 可判定为PE.</li></ul><h4 id="PE文件结构排列"><a href="#PE文件结构排列" class="headerlink" title="PE文件结构排列"></a>PE文件结构排列</h4><p><code>DOS + PE文件头 + 字表 + 字节数</code></p><p><img src="https://www.pianshen.com/images/785/9b4600340cb22b586c8e7f22c6573e31.png" alt="PE文件分析- 程序员大本营"></p><h5 id="dos文件头"><a href="#dos文件头" class="headerlink" title="dos文件头"></a>dos文件头</h5><ul><li>MZ头 ：64byte + 20byte PE_header + 节表section_header 40byte + option_header 224byte节数据</li></ul><h5 id="内存拉升："><a href="#内存拉升：" class="headerlink" title="内存拉升："></a>内存拉升：</h5><ul><li>PE文件在硬盘中200倍拉升， 在内存中1000倍拉升，空间扩充.</li></ul><p>![image-20211109124840719](/Users/jiankang/Library/Application Support/typora-user-images/image-20211109124840719.png)</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;PE文件结构&quot;&gt;&lt;a href=&quot;#PE文件结构&quot; class=&quot;headerlink&quot; title=&quot;PE文件结构&quot;&gt;&lt;/a&gt;PE文件结构&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Windows : PE (Portable Excuteable) 文件结构&lt;/p&gt;
-&lt;</summary>
-      
-    
-    
-    
-    
-    <category term="操作系统内核" scheme="http://www.010101.cc/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/"/>
     
   </entry>
   
