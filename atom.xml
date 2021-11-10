@@ -6,7 +6,7 @@
   <link href="http://www.010101.cc/atom.xml" rel="self"/>
   
   <link href="http://www.010101.cc/"/>
-  <updated>2021-11-09T05:27:26.634Z</updated>
+  <updated>2021-11-10T02:22:52.255Z</updated>
   <id>http://www.010101.cc/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>测试模板</title>
+    <title>CPU内核模块之KPCR</title>
     <link href="http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/"/>
     <id>http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/</id>
     <published>2021-11-08T14:23:44.689Z</published>
-    <updated>2021-11-09T05:27:26.634Z</updated>
+    <updated>2021-11-10T02:22:52.255Z</updated>
     
     <content type="html"><![CDATA[<h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
