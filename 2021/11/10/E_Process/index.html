@@ -18,18 +18,21 @@
   
   
   <title>内核之线程与进程的关系 | 叫我021吧</title>
-  <meta name="description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
+  <meta name="description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。      创建进程：     通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内核之线程与进程的关系">
 <meta property="og:url" content="http://www.010101.cc/2021/11/10/E_Process/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
+<meta property="og:description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。      创建进程：     通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwab540zozj30pr0a8gmv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwabd1vef8j30oy0dl75r.jpg">
 <meta property="article:published_time" content="2021-11-10T07:15:06.000Z">
-<meta property="article:modified_time" content="2021-11-10T08:13:35.854Z">
+<meta property="article:modified_time" content="2021-11-10T12:33:50.091Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="进程&amp;线程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwab540zozj30pr0a8gmv.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="http://www.010101.cc/2021/11/10/E_Process/index.html">
   
@@ -386,7 +389,17 @@
 <li><p>进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.</p>
 </li>
 <li><p>一个进程有多个线程，但至少有一个线程。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwab540zozj30pr0a8gmv.jpg" alt="image-20211110200416873"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建进程：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwabd1vef8j30oy0dl75r.jpg" alt="image-20211110201154629"></p>
+</li>
+</ul>
+<ul>
 <li><p>通过线程如何找到进程：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">* thread -&gt; cr3页面 -&gt; _Kprocess 的指针</span><br><span class="line"></span><br><span class="line">假如线程执行：</span><br><span class="line"></span><br><span class="line">mov eax,dword ptr ds:[0x12345678]</span><br><span class="line"></span><br><span class="line">cpu的解析路径： </span><br><span class="line"></span><br><span class="line">1，线程拿到当前进程的 cr3 值 Kprocess_directoryTableBase(+0x018) </span><br><span class="line">2，通过cr3的寄存器页表目录定位物理页</span><br><span class="line"></span><br><span class="line">3,EThread结构体：</span><br><span class="line">&#123;</span><br><span class="line">	0x000 KThread 结构体 </span><br><span class="line">	&#123;</span><br><span class="line">		  0x034  _KAPC_STAT</span><br><span class="line">		  &#123;</span><br><span class="line">		  			0x10 ptr32 EPROCESS;</span><br><span class="line">		  			0x044 , cmp [esi, prt* process]  </span><br><span class="line">		  			#SWapContext时会比较 44 和 220 的值是否一样，不一样会造成进程空间切换，cr3切换，详情见进程挂靠</span><br><span class="line">		  			#44位置上提供是cr3的值，资源提供方的值</span><br><span class="line">		  &#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	0x220 ptr32 EPROCESS #当前线程所属进程，当前线程是谁创建的</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
