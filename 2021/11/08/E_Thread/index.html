@@ -26,7 +26,7 @@
 <meta property="og:description" content="Wirte by 021. E_Thread 线程结构体  123456789101112131415161718192021结构体&amp;#123;	线程名称	线程状态	堆栈起始地址	线程堆栈界限 （终止地址）	线程当前位置 ESP		线程函数参数	线程函数地址&amp;#125;线程结构体数组0 --- 当前线程 ，main1 --- 创建的新线程     线程状态不同存储 123456正在运行线程 ---">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-08T14:23:44.689Z">
-<meta property="article:modified_time" content="2021-11-10T05:41:40.207Z">
+<meta property="article:modified_time" content="2021-11-10T05:55:37.863Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="操作系统内核">
 <meta name="twitter:card" content="summary">
@@ -419,7 +419,15 @@
 <h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><ul>
 <li><p>时钟中断</p>
 <p>![image-20211110132601818](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110132601818.png)</p>
+<ul>
+<li><p>中断条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.时间片到期</span><br><span class="line">2，备用线程（KPCR.PrcbData.nextThread）</span><br></pre></td></tr></table></figure></li>
+<li><p>CPU时间片</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1，KPROCESS.ThreadQuantum 值是当前进程设置的时间片值</span><br><span class="line">2，_KTHREAD.ThreadQuantum 会读取 KPROCESS.ThreadQuantum的值，在线程初始化的时候</span><br><span class="line"></span><br><span class="line">在win32里面初始为6,每次中断会调用KeupdateRuntime函数会将当前线程_KTHREAD.ThreadQuantum - 3，如果减到0，则将</span><br><span class="line">KPCR.PrcbData.QuantumEnd 位 置为 非0，表示当前线程时间片到期.</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
+</ul>
+<ul>
 <li><p>异常中断</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INT N， 页面异常</span><br></pre></td></tr></table></figure></li>
 <li><p>如何永久占用CPU?</p>
