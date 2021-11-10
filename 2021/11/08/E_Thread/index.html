@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>CPU内核模块之KPCR | 叫我021吧</title>
-  <meta name="description" content="github 访问慢，而其他网页正常.Mac 修改hosts文件12345678910111213141516171819202122232425262728293031Step 1. cd &#x2F;etc&#x2F;Step 2. sudo vi hosts# 粘贴140.82.112.4 github.com140.82.113.3 gist.github.com185.199.108.153 assets-">
+  <title>线程切换之内核E_thead | 叫我021吧</title>
+  <meta name="description" content="Wirte by 021. E_Thread 线程结构体  123456789101112131415161718192021结构体&amp;#123;	线程名称	线程状态	堆栈起始地址	线程堆栈界限 （终止地址）	线程当前位置 ESP		线程函数参数	线程函数地址&amp;#125;线程结构体数组0 --- 当前线程 ，main1 --- 创建的新线程     线程状态不同存储 123456正在运行线程 ---">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPU内核模块之KPCR">
-<meta property="og:url" content="http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:title" content="线程切换之内核E_thead">
+<meta property="og:url" content="http://www.010101.cc/2021/11/08/E_Thread/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="github 访问慢，而其他网页正常.Mac 修改hosts文件12345678910111213141516171819202122232425262728293031Step 1. cd &#x2F;etc&#x2F;Step 2. sudo vi hosts# 粘贴140.82.112.4 github.com140.82.113.3 gist.github.com185.199.108.153 assets-">
+<meta property="og:description" content="Wirte by 021. E_Thread 线程结构体  123456789101112131415161718192021结构体&amp;#123;	线程名称	线程状态	堆栈起始地址	线程堆栈界限 （终止地址）	线程当前位置 ESP		线程函数参数	线程函数地址&amp;#125;线程结构体数组0 --- 当前线程 ，main1 --- 创建的新线程     线程状态不同存储 123456正在运行线程 ---">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-08T14:23:44.689Z">
-<meta property="article:modified_time" content="2021-11-10T02:22:52.255Z">
+<meta property="article:modified_time" content="2021-11-10T05:41:40.207Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="测试标签">
+<meta property="article:tag" content="操作系统内核">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/index.html">
+  <link rel="canonical" href="http://www.010101.cc/2021/11/08/E_Thread/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -197,7 +197,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -207,7 +207,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">常见问题解决</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" rel="tag">操作系统内核</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">常见问题解决</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" rel="tag">操作系统内核</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -217,7 +217,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="font-size: 13px;">工具使用</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 13px;">常见问题解决</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" style="font-size: 13px;">操作系统内核</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" style="font-size: 13px;">测试标签</a>
+      <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="font-size: 13px;">工具使用</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 13px;">常见问题解决</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" style="font-size: 14px;">操作系统内核</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" style="font-size: 14px;">测试标签</a>
     </div>
   </div>
 
@@ -226,7 +226,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -245,7 +245,37 @@
                 <a class="category-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a>
               </p>
               <p class="item-title">
-                <a href="/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/" class="title">CPU内核模块之KPCR</a>
+                <a href="/2021/11/08/E_Process/" class="title">CPU内核模块之KPCR</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-08T14:23:44.689Z" itemprop="datePublished">2021-11-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/08/E_Thread/" class="title">线程切换之内核E_thead</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-08T14:23:44.689Z" itemprop="datePublished">2021-11-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/" class="title">CPU内核模块之KPCR</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-11-08T14:23:44.689Z" itemprop="datePublished">2021-11-08</time>
@@ -283,21 +313,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2021/11/08/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/" class="title">win32 之 PE文件结构.</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-11-08T14:04:58.000Z" itemprop="datePublished">2021-11-08</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -313,21 +328,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-%E8%AE%BF%E9%97%AE%E6%85%A2%EF%BC%8C%E8%80%8C%E5%85%B6%E4%BB%96%E7%BD%91%E9%A1%B5%E6%AD%A3%E5%B8%B8"><span class="toc-number">1.</span> <span class="toc-text">github 访问慢，而其他网页正常.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac-%E4%BF%AE%E6%94%B9hosts%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.</span> <span class="toc-text">Mac 修改hosts文件</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E-Thread"><span class="toc-number">1.</span> <span class="toc-text">E_Thread</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.1.</span> <span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2-SwapContext"><span class="toc-number">1.2.</span> <span class="toc-text">线程切换 SwapContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD"><span class="toc-number">1.3.</span> <span class="toc-text">线程中断</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-博客模板" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-E_Thread" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      CPU内核模块之KPCR
+      线程切换之内核E_thead
     </h1>
   
 
@@ -335,20 +350,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/" class="article-date">
+	<a href="/2021/11/08/E_Thread/" class="article-date">
 	  <time datetime="2021-11-08T14:23:44.689Z" itemprop="datePublished">2021-11-08</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a>
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a>
+	<a class="article-tag-link-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" rel="tag">操作系统内核</a>
   </span>
 
 
@@ -361,14 +376,55 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/08/E_Thread/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <p>Wirte by 021.</p>
+<h2 id="E-Thread"><a href="#E-Thread" class="headerlink" title="E_Thread"></a>E_Thread</h2><ul>
+<li>线程结构体</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">结构体</span><br><span class="line">&#123;</span><br><span class="line">	线程名称</span><br><span class="line">	线程状态</span><br><span class="line"></span><br><span class="line">	堆栈起始地址</span><br><span class="line">	线程堆栈界限 （终止地址）</span><br><span class="line">	线程当前位置 ESP</span><br><span class="line">	</span><br><span class="line">	线程函数参数</span><br><span class="line">	线程函数地址</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">线程结构体数组</span><br><span class="line"></span><br><span class="line">0 --- 当前线程 ，main</span><br><span class="line"></span><br><span class="line">1 --- 创建的新线程</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+
+<ul>
+<li><p>线程状态不同存储</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">正在运行线程 --- kpcr</span><br><span class="line"></span><br><span class="line">等待线程 --- 等待链表</span><br><span class="line"></span><br><span class="line">就绪/调度线程 --- 32个链表</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h3><ul>
+<li><p>创建 — 初始化线程堆栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1，结构体初始化赋值</span><br><span class="line"></span><br><span class="line">2，执行体，函数，参数，赋值</span><br><span class="line"></span><br><span class="line">3，创建堆栈，申请堆栈 stackpage , 0x80000 大小，</span><br><span class="line"></span><br><span class="line">4，堆栈初始化，起始地址、</span><br><span class="line"></span><br><span class="line">5，设定堆栈边界值（终止地址）</span><br><span class="line"></span><br><span class="line">6， 入栈</span><br><span class="line"></span><br><span class="line">7, kernelStack 栈顶 赋值，esp 赋值。</span><br><span class="line">kernelStack = 入栈对象 （1-6）</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>线程调度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="线程切换-SwapContext"><a href="#线程切换-SwapContext" class="headerlink" title="线程切换 SwapContext"></a>线程切换 SwapContext</h3><ul>
+<li>线程不是被动切换，而是主动切换。 意思是，无论是时间片到了的被动切换，还是线程IO阻塞主动出让执行权，都需要当前线程调用切换线程函数.</li>
+<li>线程没有使用TSS保存寄存器，而是使用堆栈.</li>
+<li>线程切换过程就是堆栈切换过程.</li>
+<li>在线程切换过程中，会判断2个线程是否属于同一个进程，如果不是，就切换cr3页面，也就是进程空间也切换了.</li>
+</ul>
+<p>​        ![image-20211110115259985](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110115259985.png)</p>
+<ul>
+<li><p>TheadSwap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数 ： 1，当前线程(esp)地址， 2，将要被切换线程(edi)地址</span><br><span class="line"></span><br><span class="line">步骤： </span><br><span class="line">	1，保存当前线的栈顶，上图的push操作.</span><br><span class="line">	2，将当前线程（esp）地址，存储到KernelStack中 ---  mov [esi kernelStack] ,esp</span><br><span class="line">	3，将内核中 将要被切换edi线程 的地址，交换到当前位置 ---  mov esp, [edi kernelStack]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>主动切换</p>
+<p>![image-20211110123138625](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110123138625.png)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">取出当前CPU kpcr正在执行的线程放到edi中</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><ul>
+<li><p>时钟中断</p>
+<p>![image-20211110132601818](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110132601818.png)</p>
+</li>
+<li><p>异常中断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INT N， 页面异常</span><br></pre></td></tr></table></figure></li>
+<li><p>如何永久占用CPU?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">满足 不调用API , 并且不会出现异常，并调用cli指令，屏蔽时间中断，CPU就会忽略时钟片中断.</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -378,7 +434,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BF/" title="CPU内核模块之KPCR" target="_blank" rel="external">http://www.010101.cc/2021/11/08/博客模板/</a>
+      <a href="http://www.010101.cc/2021/11/08/E_Thread/" title="线程切换之内核E_thead" target="_blank" rel="external">http://www.010101.cc/2021/11/08/E_Thread/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -424,9 +480,13 @@
   
   <ul class="pager pull-left">
     
+    <li class="prev">
+      <a href="/2021/11/08/E_Process/" title="CPU内核模块之KPCR"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
     
     <li class="next">
-      <a href="/2021/11/08/github%20%E8%AE%BF%E9%97%AE%E6%85%A2%EF%BC%8C%E8%80%8C%E5%85%B6%E4%BB%96%E7%BD%91%E9%A1%B5%E6%AD%A3%E5%B8%B8/" title="github 访问慢，而其他网页正常,fix"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/" title="CPU内核模块之KPCR"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
