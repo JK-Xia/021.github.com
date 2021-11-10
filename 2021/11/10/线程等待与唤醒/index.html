@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>内核之线程与进程的关系 | 叫我021吧</title>
-  <meta name="description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
+  <title>线程等待与唤醒之急于win32内核浅析 | 叫我021吧</title>
+  <meta name="description" content="线程唤醒与等待等待对象 伪代码 解释 基于win32 等待对象 与 当前线程 ，被等待对象的关系.  12345678910111213141516171819202122232425262728&#x2F;&#x2F;被等待对象1int Thread &amp;#123;	int a &#x3D; 0;	return a++;&amp;#125;&#x2F;&#x2F;被等待对象2int Thread1 &amp;#123;	int a &#x3D; 0;	return a++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内核之线程与进程的关系">
-<meta property="og:url" content="http://www.010101.cc/2021/11/10/E_Process/index.html">
+<meta property="og:title" content="线程等待与唤醒之急于win32内核浅析">
+<meta property="og:url" content="http://www.010101.cc/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
+<meta property="og:description" content="线程唤醒与等待等待对象 伪代码 解释 基于win32 等待对象 与 当前线程 ，被等待对象的关系.  12345678910111213141516171819202122232425262728&#x2F;&#x2F;被等待对象1int Thread &amp;#123;	int a &#x3D; 0;	return a++;&amp;#125;&#x2F;&#x2F;被等待对象2int Thread1 &amp;#123;	int a &#x3D; 0;	return a++">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-10T07:15:06.000Z">
-<meta property="article:modified_time" content="2021-11-10T08:13:35.854Z">
+<meta property="article:modified_time" content="2021-11-10T11:37:48.642Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="进程&amp;线程">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://www.010101.cc/2021/11/10/E_Process/index.html">
+  <link rel="canonical" href="http://www.010101.cc/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -328,21 +328,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">线程与进程关系</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%94%A4%E9%86%92%E4%B8%8E%E7%AD%89%E5%BE%85"><span class="toc-number">1.</span> <span class="toc-text">线程唤醒与等待</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E5%BE%85%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.0.1.</span> <span class="toc-text">等待对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%AD%A5%E9%AA%A4-TODO"><span class="toc-number">1.0.2.</span> <span class="toc-text">逻辑步骤-TODO</span></a></li></ol></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-E_Process" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-线程等待与唤醒" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      内核之线程与进程的关系
+      线程等待与唤醒之急于win32内核浅析
     </h1>
   
 
@@ -350,7 +350,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/11/10/E_Process/" class="article-date">
+	<a href="/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/" class="article-date">
 	  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
 	</a>
 </span>
@@ -376,20 +376,21 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/10/E_Process/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="线程与进程关系"><a href="#线程与进程关系" class="headerlink" title="线程与进程关系"></a>线程与进程关系</h2><ul>
-<li><p>进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.</p>
-</li>
-<li><p>一个进程有多个线程，但至少有一个线程。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。</span><br></pre></td></tr></table></figure></li>
-<li><p>通过线程如何找到进程：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">* thread -&gt; cr3页面 -&gt; _Kprocess 的指针</span><br><span class="line"></span><br><span class="line">假如线程执行：</span><br><span class="line"></span><br><span class="line">mov eax,dword ptr ds:[0x12345678]</span><br><span class="line"></span><br><span class="line">cpu的解析路径： </span><br><span class="line"></span><br><span class="line">1，线程拿到当前进程的 cr3 值 Kprocess_directoryTableBase(+0x018) </span><br><span class="line">2，通过cr3的寄存器页表目录定位物理页</span><br><span class="line"></span><br><span class="line">3,EThread结构体：</span><br><span class="line">&#123;</span><br><span class="line">	0x000 KThread 结构体 </span><br><span class="line">	&#123;</span><br><span class="line">		  0x034  _KAPC_STAT</span><br><span class="line">		  &#123;</span><br><span class="line">		  			0x10 ptr32 EPROCESS;</span><br><span class="line">		  			0x044 , cmp [esi, prt* process]  </span><br><span class="line">		  			#SWapContext时会比较 44 和 220 的值是否一样，不一样会造成进程空间切换，cr3切换，详情见进程挂靠</span><br><span class="line">		  			#44位置上提供是cr3的值，资源提供方的值</span><br><span class="line">		  &#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	0x220 ptr32 EPROCESS #当前线程所属进程，当前线程是谁创建的</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+        <h2 id="线程唤醒与等待"><a href="#线程唤醒与等待" class="headerlink" title="线程唤醒与等待"></a>线程唤醒与等待</h2><h4 id="等待对象"><a href="#等待对象" class="headerlink" title="等待对象"></a>等待对象</h4><ul>
+<li>伪代码 解释 基于win32 等待对象 与 当前线程 ，被等待对象的关系.</li>
 </ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//被等待对象1</span><br><span class="line">int Thread </span><br><span class="line">&#123;</span><br><span class="line">	int a = 0;</span><br><span class="line">	return a++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//被等待对象2</span><br><span class="line">int Thread1 </span><br><span class="line">&#123;</span><br><span class="line">	int a = 0;</span><br><span class="line">	return a++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//当前主线程 </span><br><span class="line">void main(...)</span><br><span class="line">&#123;</span><br><span class="line">		//被等待对象</span><br><span class="line">		int a Thead.t1.start;</span><br><span class="line">		int a1 = Thead1.t1.start;</span><br><span class="line">		</span><br><span class="line">		解析 -&gt; 等待对象</span><br><span class="line">		waitingforSinglObject(arr[t1,t2],xx);</span><br><span class="line">		</span><br><span class="line">		只有等待： 等待对象中的被等待对象t1和t2执行完后，当前main线程才能继续执行.</span><br><span class="line">		printf(...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="逻辑步骤-TODO"><a href="#逻辑步骤-TODO" class="headerlink" title="逻辑步骤-TODO"></a>逻辑步骤-TODO</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">WaitForSingleObject调用内核函数NtWaitForObject,</span><br><span class="line"></span><br><span class="line">NtWaitForObject 调用ObReferenceObjectByHandle,通过当前线程对象句柄找到&#x27;等待对象结构体&#x27;的首地址</span><br><span class="line"></span><br><span class="line">将结构体首地址传递给 KeWaitSingleObject</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">KeWaitSingleObject 步骤：</span><br><span class="line"></span><br><span class="line">1，准备等待块._wait_block; 默认初始4个等待块  </span><br><span class="line">..... 这块内核比较复杂黑盒,todo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">被等待对象：必须具备_DISPATCHER_HEADER属性的对象，</span><br><span class="line"></span><br><span class="line">_DISPATCHER_HEADER结构体</span><br><span class="line">&#123;</span><br><span class="line">		...</span><br><span class="line">		...</span><br><span class="line">		+0x004 SingleStat; 信号状态 &gt; 0;</span><br><span class="line">		+0x008 WaitListHead; 所有等待块双向链表地址.</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">内部处理逻辑伪代码:</span><br><span class="line"></span><br><span class="line">while(1)</span><br><span class="line">&#123;</span><br><span class="line">		if(符合条件) // 1,符合超时条件， 等待对象的信号量 &gt; 0;</span><br><span class="line">		&#123;</span><br><span class="line">				1，修改等待对象的singleStat;</span><br><span class="line">				2,退出循环</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">				if(不符合条件) // 超时并且被等待对象 !&gt;0;</span><br><span class="line">				&#123;</span><br><span class="line">						if(第一次执行)</span><br><span class="line">						&#123;</span><br><span class="line">								</span><br><span class="line">						&#125;</span><br><span class="line">				</span><br><span class="line">				&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">		// 将waitingblockList 位置清0;</span><br><span class="line">		//释放_kwait_block等待块内存.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -399,7 +400,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/10/E_Process/" title="内核之线程与进程的关系" target="_blank" rel="external">http://www.010101.cc/2021/11/10/E_Process/</a>
+      <a href="http://www.010101.cc/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/" title="线程等待与唤醒之急于win32内核浅析" target="_blank" rel="external">http://www.010101.cc/2021/11/10/线程等待与唤醒/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -445,9 +446,13 @@
   
   <ul class="pager pull-left">
     
+    <li class="prev">
+      <a href="/2021/11/10/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BCAS%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" title="高并发之CAS自顶向下"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
     
     <li class="next">
-      <a href="/2021/11/10/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BCAS%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" title="高并发之CAS自顶向下"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/" title="win32 之 PE文件结构解读"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
