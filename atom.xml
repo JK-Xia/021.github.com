@@ -6,7 +6,7 @@
   <link href="http://www.010101.cc/atom.xml" rel="self"/>
   
   <link href="http://www.010101.cc/"/>
-  <updated>2021-11-10T06:47:16.216Z</updated>
+  <updated>2021-11-10T06:48:40.804Z</updated>
   <id>http://www.010101.cc/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>win32 之 PE文件结构笔记</title>
+    <title>win32 之 PE文件结构解读</title>
     <link href="http://www.010101.cc/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/"/>
     <id>http://www.010101.cc/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/</id>
     <published>2021-11-10T06:44:58.000Z</published>
-    <updated>2021-11-10T06:47:16.216Z</updated>
+    <updated>2021-11-10T06:48:40.804Z</updated>
     
     <content type="html"><![CDATA[<h1 id="PE文件结构"><a href="#PE文件结构" class="headerlink" title="PE文件结构"></a>PE文件结构</h1><ul><li><p>Windows : PE (Portable Excuteable) 文件结构</p></li><li><p>Linux : ELF(Executable and linking formate) 文件结构</p></li></ul><h4 id="PE-文件特征和格式"><a href="#PE-文件特征和格式" class="headerlink" title="PE 文件特征和格式"></a>PE 文件特征和格式</h4><ul><li>执行二进制文件转16进制后，前2个字节是MZ, 3C位置值，再往下找3C位置的字节值会显示PE. 可判定为PE.</li></ul><h4 id="PE文件结构排列"><a href="#PE文件结构排列" class="headerlink" title="PE文件结构排列"></a>PE文件结构排列</h4><p><code>DOS + PE文件头 + 字表 + 字节数</code></p><p><img src="https://www.pianshen.com/images/785/9b4600340cb22b586c8e7f22c6573e31.png" alt="PE文件分析- 程序员大本营"></p><h5 id="dos文件头"><a href="#dos文件头" class="headerlink" title="dos文件头"></a>dos文件头</h5><ul><li>MZ头 ：64byte + 20byte PE_header + 节表section_header 40byte + option_header 224byte节数据</li></ul><h5 id="内存拉升："><a href="#内存拉升：" class="headerlink" title="内存拉升："></a>内存拉升：</h5><ul><li>PE文件在硬盘中200倍拉升， 在内存中1000倍拉升，空间扩充.</li></ul><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1xavystj31bx0u0juo.jpg" alt="image-20211109124840719"></p>]]></content>
     
@@ -71,15 +71,26 @@
   </entry>
   
   <entry>
-    <title>test</title>
-    <link href="http://www.010101.cc/2021/11/10/test/"/>
-    <id>http://www.010101.cc/2021/11/10/test/</id>
-    <published>2021-11-10T06:43:53.000Z</published>
-    <updated>2021-11-10T06:43:53.286Z</updated>
+    <title>CPU内核模块之KPCR</title>
+    <link href="http://www.010101.cc/2021/11/10/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/"/>
+    <id>http://www.010101.cc/2021/11/10/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/</id>
+    <published>2021-11-10T06:44:58.000Z</published>
+    <updated>2021-11-10T06:49:08.943Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;github-访问慢，而其他网页正常&quot;&gt;&lt;a href=&quot;#github-访问慢，而其他网页正常&quot; class=&quot;headerlink&quot; title=&quot;github 访问慢，而其他网页正常.&quot;&gt;&lt;/a&gt;github 访问慢，而其他网页正常.&lt;/h2&gt;&lt;h3 id=</summary>
+      
     
     
     
+    <category term="测试分类" scheme="http://www.010101.cc/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/"/>
     
+    
+    <category term="测试标签" scheme="http://www.010101.cc/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/"/>
     
   </entry>
   
@@ -108,37 +119,13 @@
   </entry>
   
   <entry>
-    <title>CPU内核模块之KPCR</title>
-    <link href="http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/"/>
-    <id>http://www.010101.cc/2021/11/08/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/</id>
-    <published>2021-11-08T14:23:44.689Z</published>
-    <updated>2021-11-10T02:22:52.255Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;github-访问慢，而其他网页正常&quot;&gt;&lt;a href=&quot;#github-访问慢，而其他网页正常&quot; class=&quot;headerlink&quot; title=&quot;github 访问慢，而其他网页正常.&quot;&gt;&lt;/a&gt;github 访问慢，而其他网页正常.&lt;/h2&gt;&lt;h3 id=</summary>
-      
-    
-    
-    
-    <category term="测试分类" scheme="http://www.010101.cc/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/"/>
-    
-    
-    <category term="测试标签" scheme="http://www.010101.cc/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>github 访问慢，而其他网页正常,fix</title>
+    <title>github访问慢，而其他网页正常解决</title>
     <link href="http://www.010101.cc/2021/11/08/github%20%E8%AE%BF%E9%97%AE%E6%85%A2%EF%BC%8C%E8%80%8C%E5%85%B6%E4%BB%96%E7%BD%91%E9%A1%B5%E6%AD%A3%E5%B8%B8/"/>
     <id>http://www.010101.cc/2021/11/08/github%20%E8%AE%BF%E9%97%AE%E6%85%A2%EF%BC%8C%E8%80%8C%E5%85%B6%E4%BB%96%E7%BD%91%E9%A1%B5%E6%AD%A3%E5%B8%B8/</id>
     <published>2021-11-08T14:04:58.000Z</published>
-    <updated>2021-11-09T04:46:24.555Z</updated>
+    <updated>2021-11-10T06:54:04.831Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="github-访问慢，而其他网页正常"><a href="#github-访问慢，而其他网页正常" class="headerlink" title="github 访问慢，而其他网页正常."></a>github 访问慢，而其他网页正常.</h2><h3 id="Mac-修改hosts文件"><a href="#Mac-修改hosts文件" class="headerlink" title="Mac 修改hosts文件"></a>Mac 修改hosts文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Step 1. cd /etc/</span><br><span class="line"></span><br><span class="line">Step 2. sudo vi hosts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 粘贴</span><br><span class="line">140.82.112.4 github.com</span><br><span class="line">140.82.113.3 gist.github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.68.133 raw.githubusercontent.com</span><br><span class="line">199.232.68.133 gist.githubusercontent.com</span><br><span class="line">199.232.68.133 cloud.githubusercontent.com</span><br><span class="line">151.101.192.133 camo.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars0.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars1.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars2.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars3.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars4.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars5.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars6.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars7.githubusercontent.com</span><br><span class="line">199.232.68.133 avatars8.githubusercontent.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
     
     
       
