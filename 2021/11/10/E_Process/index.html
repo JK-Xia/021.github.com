@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Tag: 工具使用 | 叫我021吧</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://www.010101.cc/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.html">
+  <title>内核之线程与进程的关系 | 叫我021吧</title>
+  <meta name="description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内核之线程与进程的关系">
+<meta property="og:url" content="http://www.010101.cc/2021/11/10/E_Process/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="线程与进程关系 进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.  一个进程有多个线程，但至少有一个线程。 11，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。 通过线程如何找到进程： 12345678910111213141516171819202122232425262728* thread -&gt; cr3页面 -&gt; _Kproc">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-10T07:15:06.000Z">
+<meta property="article:modified_time" content="2021-11-10T08:13:35.854Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="进程&amp;线程">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://www.010101.cc/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.html">
+  <link rel="canonical" href="http://www.010101.cc/2021/11/10/E_Process/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -318,62 +323,205 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-tags post-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Tag: 工具使用</h1>
-      <p class="text-muted hidden-xs">Total 1 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/tags">All</a></li>
-          
-          <li><a href="/tags/常见问题解决/">常见问题解决</a></li>
-          
-          <li><a href="/tags/工具使用/">工具使用</a></li>
-          
-          <li><a href="/tags/测试标签/">测试标签</a></li>
-          
-          <li><a href="/tags/进程-线程/">进程&amp;线程</a></li>
-          
-          <li><a href="/tags/PE可执行文件/">PE可执行文件</a></li>
-          
-          <li><a href="/tags/内存管理/">内存管理</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="row">
-        
-<div class="col-md-6">
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">线程与进程关系</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-E_Process" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-<article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="panel-body">
-     <div class="article-meta">
-       <time datetime="2021-11-08T14:04:58.000Z" itemprop="datePublished">2021-11-08</time>
-     </div>
-     <h3 class="article-title" itemprop="name">
-       <a class="article-link" href="/2021/11/08/github+hexo/">免主机，免备案，从0到1教你搭建个人博客(hexo + github page)！</a>
-     </h3>
-   </div>
-   
-   <div class="panel-footer">
-     
-      <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="label label-default mb">工具使用</a>
-     
-     
-   </div>
-   
-</article>
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      内核之线程与进程的关系
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/11/10/E_Process/" class="article-date">
+	  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" rel="tag">进程&线程</a>
+  </span>
 
 
-</div>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/10/E_Process/#comments" class="article-comment-link">Comments</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="线程与进程关系"><a href="#线程与进程关系" class="headerlink" title="线程与进程关系"></a>线程与进程关系</h2><ul>
+<li><p>进程是资源集合，提供cr3的值，cr3是页目录表的基址，cr3确定了，线程才能访问.</p>
+</li>
+<li><p>一个进程有多个线程，但至少有一个线程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1，进程提供了空间上概念,进程提供了线程哪些空间地址可以访问的逻辑。</span><br></pre></td></tr></table></figure></li>
+<li><p>通过线程如何找到进程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">* thread -&gt; cr3页面 -&gt; _Kprocess 的指针</span><br><span class="line"></span><br><span class="line">假如线程执行：</span><br><span class="line"></span><br><span class="line">mov eax,dword ptr ds:[0x12345678]</span><br><span class="line"></span><br><span class="line">cpu的解析路径： </span><br><span class="line"></span><br><span class="line">1，线程拿到当前进程的 cr3 值 Kprocess_directoryTableBase(+0x018) </span><br><span class="line">2，通过cr3的寄存器页表目录定位物理页</span><br><span class="line"></span><br><span class="line">3,EThread结构体：</span><br><span class="line">&#123;</span><br><span class="line">	0x000 KThread 结构体 </span><br><span class="line">	&#123;</span><br><span class="line">		  0x034  _KAPC_STAT</span><br><span class="line">		  &#123;</span><br><span class="line">		  			0x10 ptr32 EPROCESS;</span><br><span class="line">		  			0x044 , cmp [esi, prt* process]  </span><br><span class="line">		  			#SWapContext时会比较 44 和 220 的值是否一样，不一样会造成进程空间切换，cr3切换，详情见进程挂靠</span><br><span class="line">		  			#44位置上提供是cr3的值，资源提供方的值</span><br><span class="line">		  &#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	0x220 ptr32 EPROCESS #当前线程所属进程，当前线程是谁创建的</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.010101.cc/2021/11/10/E_Process/" title="内核之线程与进程的关系" target="_blank" rel="external">http://www.010101.cc/2021/11/10/E_Process/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/with021" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/with021" target="_blank"><span class="text-dark">010101 Decimal is 21, so call me 021(zero to one)</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>记录点滴生活。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/11/10/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="内存管理之线程地址管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="wechat,weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipay.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -432,6 +580,39 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'KrdghyjYV8lbuzvwWV6Hv7p8-gzGzoHsz',
+    appKey: 'Nl2ozIoQVlJ3uK5V7JG7fUMo',
+    placeholder: '来了，老弟，说点啥，say something before you go away...',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
