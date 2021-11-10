@@ -17,19 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>线程切换之内核E_thead | 叫我021吧</title>
+  <title>线程切换之内核E_thead浅析 | 叫我021吧</title>
   <meta name="description" content="Wirte by 021. E_Thread 线程结构体  123456789101112131415161718192021结构体&amp;#123;	线程名称	线程状态	堆栈起始地址	线程堆栈界限 （终止地址）	线程当前位置 ESP		线程函数参数	线程函数地址&amp;#125;线程结构体数组0 --- 当前线程 ，main1 --- 创建的新线程     线程状态不同存储 123456正在运行线程 ---">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程切换之内核E_thead">
+<meta property="og:title" content="线程切换之内核E_thead浅析">
 <meta property="og:url" content="http://www.010101.cc/2021/11/08/E_Thread/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Wirte by 021. E_Thread 线程结构体  123456789101112131415161718192021结构体&amp;#123;	线程名称	线程状态	堆栈起始地址	线程堆栈界限 （终止地址）	线程当前位置 ESP		线程函数参数	线程函数地址&amp;#125;线程结构体数组0 --- 当前线程 ，main1 --- 创建的新线程     线程状态不同存储 123456正在运行线程 ---">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1nx9qgvj30qm0fu753.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1odurnyj30zr0g4774.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1ogwzuej30tp0d7q3x.jpg">
 <meta property="article:published_time" content="2021-11-08T14:23:44.689Z">
-<meta property="article:modified_time" content="2021-11-10T05:55:37.863Z">
+<meta property="article:modified_time" content="2021-11-10T06:38:08.853Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="操作系统内核">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1nx9qgvj30qm0fu753.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="http://www.010101.cc/2021/11/08/E_Thread/index.html">
   
@@ -260,7 +264,7 @@
                 <a class="category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a>
               </p>
               <p class="item-title">
-                <a href="/2021/11/08/E_Thread/" class="title">线程切换之内核E_thead</a>
+                <a href="/2021/11/08/E_Thread/" class="title">线程切换之内核E_thead浅析</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-11-08T14:23:44.689Z" itemprop="datePublished">2021-11-08</time>
@@ -342,7 +346,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      线程切换之内核E_thead
+      线程切换之内核E_thead浅析
     </h1>
   
 
@@ -408,22 +412,28 @@
 <li>线程切换过程就是堆栈切换过程.</li>
 <li>在线程切换过程中，会判断2个线程是否属于同一个进程，如果不是，就切换cr3页面，也就是进程空间也切换了.</li>
 </ul>
-<p>​        ![image-20211110115259985](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110115259985.png)</p>
+<p>​        <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1nx9qgvj30qm0fu753.jpg" alt="image-20211110115259985"></p>
 <ul>
 <li><p>TheadSwap</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数 ： 1，当前线程(esp)地址， 2，将要被切换线程(edi)地址</span><br><span class="line"></span><br><span class="line">步骤： </span><br><span class="line">	1，保存当前线的栈顶，上图的push操作.</span><br><span class="line">	2，将当前线程（esp）地址，存储到KernelStack中 ---  mov [esi kernelStack] ,esp</span><br><span class="line">	3，将内核中 将要被切换edi线程 的地址，交换到当前位置 ---  mov esp, [edi kernelStack]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>主动切换</p>
-<p>![image-20211110123138625](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110123138625.png)</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1odurnyj30zr0g4774.jpg" alt="image-20211110123138625"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">取出当前CPU kpcr正在执行的线程放到edi中</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="线程中断"><a href="#线程中断" class="headerlink" title="线程中断"></a>线程中断</h3><ul>
 <li><p>时钟中断</p>
-<p>![image-20211110132601818](/Users/jiankang/Library/Application Support/typora-user-images/image-20211110132601818.png)</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwa1ogwzuej30tp0d7q3x.jpg" alt="image-20211110132601818"></p>
 <ul>
 <li><p>中断条件</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.时间片到期</span><br><span class="line">2，备用线程（KPCR.PrcbData.nextThread）</span><br></pre></td></tr></table></figure></li>
 <li><p>CPU时间片</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1，KPROCESS.ThreadQuantum 值是当前进程设置的时间片值</span><br><span class="line">2，_KTHREAD.ThreadQuantum 会读取 KPROCESS.ThreadQuantum的值，在线程初始化的时候</span><br><span class="line"></span><br><span class="line">在win32里面初始为6,每次中断会调用KeupdateRuntime函数会将当前线程_KTHREAD.ThreadQuantum - 3，如果减到0，则将</span><br><span class="line">KPCR.PrcbData.QuantumEnd 位 置为 非0，表示当前线程时间片到期.</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Tss</p>
+<ul>
+<li><p>内核堆栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initStack 栈底</span><br><span class="line">kernelStack 栈顶</span><br><span class="line">stackLimte 边界</span><br><span class="line"></span><br><span class="line">TSS.esp0得到当前线程0环堆栈，线程在切换的时候保证0环线程堆栈的唯一和有序性.</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -442,7 +452,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/08/E_Thread/" title="线程切换之内核E_thead" target="_blank" rel="external">http://www.010101.cc/2021/11/08/E_Thread/</a>
+      <a href="http://www.010101.cc/2021/11/08/E_Thread/" title="线程切换之内核E_thead浅析" target="_blank" rel="external">http://www.010101.cc/2021/11/08/E_Thread/</a>
     </li>
     
     <li class="post-copyright-license">
