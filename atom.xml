@@ -6,7 +6,7 @@
   <link href="http://www.010101.cc/atom.xml" rel="self"/>
   
   <link href="http://www.010101.cc/"/>
-  <updated>2021-11-10T12:33:50.091Z</updated>
+  <updated>2021-11-11T07:13:08.483Z</updated>
   <id>http://www.010101.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM之Java编译器浅析</title>
+    <link href="http://www.010101.cc/2021/11/11/JVM%E4%B9%8B%E7%BC%96%E8%AF%91%E6%B5%85%E6%9E%90/"/>
+    <id>http://www.010101.cc/2021/11/11/JVM%E4%B9%8B%E7%BC%96%E8%AF%91%E6%B5%85%E6%9E%90/</id>
+    <published>2021-11-11T07:04:04.000Z</published>
+    <updated>2021-11-11T07:13:08.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>Wirte by 021.</p><h2 id="Java编译器浅析"><a href="#Java编译器浅析" class="headerlink" title="Java编译器浅析"></a>Java编译器浅析</h2><ul><li><p><strong>本地代码（native code）</strong> 是计算机编程（代码），编译用来运行一个特殊的处理器（如英特尔x86级的处理器）和它的特殊指令集，简称机器码.</p><ul><li><p>Win : exe</p></li><li><p>Linux : elf</p></li></ul></li></ul><h4 id="模式1-：-即时编译JIT编译器-Just-in-time"><a href="#模式1-：-即时编译JIT编译器-Just-in-time" class="headerlink" title="模式1 ： 即时编译JIT编译器-Just in time."></a>模式1 ： 即时编译JIT编译器-Just in time.</h4><ul><li>主要用于JVM将 **class热点代码 ** 编译为本地代码.</li></ul><h4 id="模式2：-解释器-byteCode-intepreter"><a href="#模式2：-解释器-byteCode-intepreter" class="headerlink" title="模式2： 解释器 byteCode intepreter"></a>模式2： 解释器 byteCode intepreter</h4><ul><li>在程序运行过程中，JVM将字节码再转换成本地可执行的本地代码,边解释字节码边执行，故而称为解释器。</li></ul><h4 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">默认： -Xmixed 混合模式</span><br><span class="line">-Xint 解释模式，启动块，执行稍微慢</span><br><span class="line">-XComp 编译模式，启动时间慢，需要编译</span><br></pre></td></tr></table></figure><p>​                        </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Wirte by 021.&lt;/p&gt;
+&lt;h2 id=&quot;Java编译器浅析&quot;&gt;&lt;a href=&quot;#Java编译器浅析&quot; class=&quot;headerlink&quot; title=&quot;Java编译器浅析&quot;&gt;&lt;/a&gt;Java编译器浅析&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;本地代码</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://www.010101.cc/categories/Java/"/>
+    
+    
+    <category term="JVM" scheme="http://www.010101.cc/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>内核之线程与进程的关系</title>
@@ -170,8 +196,8 @@
   
   <entry>
     <title>Java类加载浅析之自定义加载热更新</title>
-    <link href="http://www.010101.cc/2021/11/10/JVM%E6%B5%85%E6%9E%90/"/>
-    <id>http://www.010101.cc/2021/11/10/JVM%E6%B5%85%E6%9E%90/</id>
+    <link href="http://www.010101.cc/2021/11/10/JVM%E4%B9%8BclassLoader%E6%B5%85%E6%9E%90/"/>
+    <id>http://www.010101.cc/2021/11/10/JVM%E4%B9%8BclassLoader%E6%B5%85%E6%9E%90/</id>
     <published>2021-11-10T06:44:58.000Z</published>
     <updated>2021-11-11T06:35:16.582Z</updated>
     
