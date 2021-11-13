@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>汇编之趣味计算机 | 叫我021吧</title>
+  <meta name="description" content="汇编之有趣的计算机Wirte by 021.   Leave a message if i messed up ! : )  汇编的加减乘除：1234567891011			  汇编语言                 编译器                    机器语言   加      INC EAX                  	---&gt;                  01">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编之趣味计算机">
+<meta property="og:url" content="http://www.010101.cc/2021/11/13/%E6%B1%87%E7%BC%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="汇编之有趣的计算机Wirte by 021.   Leave a message if i messed up ! : )  汇编的加减乘除：1234567891011			  汇编语言                 编译器                    机器语言   加      INC EAX                  	---&gt;                  01">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwdkgbq4kgj30jg0cv3zx.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwdq50bglcj30e4089t8n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwdq732jodj30fj08vq2y.jpg">
+<meta property="og:image" content="http://www.010101.cc/2021/11/13/%E6%B1%87%E7%BC%96/image-20211113191238456.png">
+<meta property="article:published_time" content="2021-11-13T07:56:26.000Z">
+<meta property="article:modified_time" content="2021-11-13T14:27:26.468Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="汇编">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwdkgbq4kgj30jg0cv3zx.jpg">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://www.010101.cc/2021/11/13/%E6%B1%87%E7%BC%96/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/with021" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">010101 Decimal is 21, so call me 021(zero to one)</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/./links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/./about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/with021" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/with021" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/with021" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎与我交流和分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Assembly/">Assembly</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6/">计算机硬件</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" rel="tag">PE可执行文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">常见问题解决</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" rel="tag">并发原子锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" rel="tag">树结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" rel="tag">进程&线程</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" style="font-size: 13px;">PE可执行文件</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="font-size: 13px;">工具使用</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 13px;">常见问题解决</a> <a href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" style="font-size: 13.33px;">并发原子锁</a> <a href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" style="font-size: 13px;">树结构</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 13px;">汇编</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" style="font-size: 13px;">测试标签</a> <a href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" style="font-size: 13.67px;">进程&线程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">19</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Assembly/">Assembly</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/13/%E6%B1%87%E7%BC%96/" class="title">汇编之趣味计算机</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-13T07:56:26.000Z" itemprop="datePublished">2021-11-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/13/JVM%E4%B9%8BGC%20Stop%20The%20World%20&%20SafePoint/" class="title">JVM之GC Stop The World &amp; SafePoint</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-13T05:08:57.000Z" itemprop="datePublished">2021-11-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/13/JVM%E4%B9%8BGC%E8%B0%83%E4%BC%98%E6%96%B9%E6%B3%95%E8%AE%BA/" class="title">JVM之GC调优方法论</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-13T05:08:57.000Z" itemprop="datePublished">2021-11-13</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/11/JVM%E4%B9%8B%E7%BC%96%E8%AF%91%E6%B5%85%E6%9E%90/" class="title">JVM之Java编译器浅析</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-11T07:04:04.000Z" itemprop="datePublished">2021-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Java/">Java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/11/JVM%E4%B9%8BGC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%B5%85%E6%9E%90/" class="title">JVM之GC垃圾回收器与算法深入浅出</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-11T07:04:04.000Z" itemprop="datePublished">2021-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E4%B9%8B%E6%9C%89%E8%B6%A3%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">汇编之有趣的计算机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E7%9A%84%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">汇编的加减乘除：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E6%8D%A2%E7%AE%97"><span class="toc-number">1.2.</span> <span class="toc-text">进制换算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%BD%E5%BA%A6"><span class="toc-number">1.3.</span> <span class="toc-text">数据宽度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.3.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%AC%A6%E5%8F%B7-%E4%B8%8E-%E6%97%A0%E7%AC%A6%E5%8F%B7"><span class="toc-number">1.4.</span> <span class="toc-text">有符号 与 无符号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81-%E5%8F%8D%E7%A0%81-%E8%A1%A5%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">原码 反码 补码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81"><span class="toc-number">1.5.1.</span> <span class="toc-text">原码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81"><span class="toc-number">1.5.2.</span> <span class="toc-text">反码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81"><span class="toc-number">1.5.3.</span> <span class="toc-text">补码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.1.</span> <span class="toc-text">与运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%96%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.2.</span> <span class="toc-text">或运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.3.</span> <span class="toc-text">异或运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.4.</span> <span class="toc-text">非运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E7%A7%BB%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.5.</span> <span class="toc-text">左移运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%B3%E7%A7%BB%E8%BF%90%E7%AE%97"><span class="toc-number">1.6.6.</span> <span class="toc-text">右移运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-number">1.7.</span> <span class="toc-text">+  - * &#x2F;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#-2"><span class="toc-number">1.7.1.</span> <span class="toc-text">+</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-汇编" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      汇编之趣味计算机
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/11/13/%E6%B1%87%E7%BC%96/" class="article-date">
+	  <time datetime="2021-11-13T07:56:26.000Z" itemprop="datePublished">2021-11-13</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Assembly/">Assembly</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/13/%E6%B1%87%E7%BC%96/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="汇编之有趣的计算机"><a href="#汇编之有趣的计算机" class="headerlink" title="汇编之有趣的计算机"></a>汇编之有趣的计算机</h2><p>Wirte by 021.   Leave a message if i messed up ! : )</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwdkgbq4kgj30jg0cv3zx.jpg" alt="汇编语言入门教程- 阮一峰的网络日志"></p>
+<h3 id="汇编的加减乘除："><a href="#汇编的加减乘除：" class="headerlink" title="汇编的加减乘除："></a>汇编的加减乘除：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">			  汇编语言                 编译器                    机器语言   </span><br><span class="line"></span><br><span class="line">加      INC EAX                  	---&gt;                  0100 0000  </span><br><span class="line"></span><br><span class="line">减      DEC EAX                    ---&gt;                  0100 1000</span><br><span class="line"></span><br><span class="line">乘      MUL EAX       						  ---&gt;                  1111 0111 1110 0000</span><br><span class="line"></span><br><span class="line">除      DIV EAX                    ---&gt;                  1111 0111 1111 0000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="进制换算"><a href="#进制换算" class="headerlink" title="进制换算"></a>进制换算</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111 </span><br><span class="line"></span><br><span class="line">0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15</span><br><span class="line"></span><br><span class="line">0    1    2    3    4    5    6    7    8    9    A    B    C    D     E   F</span><br><span class="line"></span><br><span class="line">测试：</span><br><span class="line">hex : 6d  7f 008c e3 246</span><br><span class="line"></span><br><span class="line">hex to bin</span><br><span class="line">6 + d = 0110 1101, 7 + f = 0111 1111, 8 + c =0000 0000 1000 1100, e + 3 = 1110 0011, 2 + 4 + 6 = 0010 0100 0110.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="数据宽度"><a href="#数据宽度" class="headerlink" title="数据宽度"></a>数据宽度</h3><ul>
+<li><strong>超过数据宽度将被丢弃</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">位 bit: 0，最大值 1.</span><br><span class="line"></span><br><span class="line">字节 byte: 0000 0000 , 最大值 1111 1111 ， 0 - ff. 0xff.</span><br><span class="line"></span><br><span class="line">字word: 0000 0000 0000 0000 ,最大值 1111 1111 1111 1111 , 0 - ffff, 0xffff.</span><br><span class="line"></span><br><span class="line">双字doubleWord: 0000 0000 0000 0000 0000 0000 0000 0000 0000 , 最大值 0xffffffff.</span><br><span class="line"></span><br><span class="line">数据宽度测试：</span><br><span class="line">char a = 0x1ff, 存入数据是ff 舍弃了1，因为宽度不够.</span><br><span class="line"></span><br><span class="line">Xcode 进入debug 模式， 在右边控制台或者内存值, 输出：</span><br><span class="line"></span><br><span class="line">x/1xb 0x7ffeefbff3df ， 取1个字节的值，用16进制表示，表示单字节</span><br><span class="line">0x7ffeefbff3df: 0xff  只存了ff。</span><br><span class="line"></span><br><span class="line">x/nfu &lt;addr&gt; </span><br><span class="line"></span><br><span class="line">n，表示要显示的内存单元的个数</span><br><span class="line">f，表示显示方式, 可取如下值：</span><br><span class="line">x 按十六进制格式显示变量</span><br><span class="line">d 按十进制格式显示变量</span><br><span class="line">u 按十进制格式显示无符号整型</span><br><span class="line">o 按八进制格式显示变量</span><br><span class="line">t 按二进制格式显示变量</span><br><span class="line">a 按十六进制格式显示变量</span><br><span class="line">i 指令地址格式</span><br><span class="line">c 按字符格式显示变量</span><br><span class="line">f 按浮点数格式显示变量</span><br><span class="line"></span><br><span class="line">u，表示一个地址单元的长度：</span><br><span class="line">b 表示单字节</span><br><span class="line">h 表示双字节</span><br><span class="line">w 表示四字节</span><br><span class="line">g 表示八字节</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x/16xb self</span><br><span class="line">会显示 self 指针地址内容，16 个字节，16 进制。</span><br><span class="line">x/8cb 0x7fc359a03040</span><br><span class="line">会显示地址 0x7fc359a03040 地址的内容，8 个字节，按字符格式显示。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="有符号-与-无符号"><a href="#有符号-与-无符号" class="headerlink" title="有符号 与 无符号"></a>有符号 与 无符号</h3><ul>
+<li><p><strong>有符号数与无符号数正数显示结果一样，负数结果不一样</strong></p>
+</li>
+<li><p>有符号</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无符号 0000 0001 就是 0000 0001, </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>无符号</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">测试： 1 ， 0x01,</span><br><span class="line">最高位 0， 是正数.</span><br><span class="line">0000 0001    </span><br><span class="line"></span><br><span class="line">最高位 1，是负数.</span><br><span class="line">1000 0001  , 0x81</span><br><span class="line"></span><br><span class="line">int x = 0x81000000; </span><br><span class="line">printf(&quot;有符号表示 %u\n&quot;,x);</span><br><span class="line">printf(&quot;无符号表示 %d\n&quot;,x);</span><br><span class="line">有符号表示 2164260864</span><br><span class="line">无符号表示 -2130706432</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="原码-反码-补码"><a href="#原码-反码-补码" class="headerlink" title="原码 反码 补码"></a>原码 反码 补码</h3><h4 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h4><ul>
+<li><strong>正数存储用原码反码补码都一样</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最高位是符号位，其余位为数值的绝对值. </span><br><span class="line">1 的原码 0000 0001 </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h4><ul>
+<li><strong>正数的反码原码相同，负数符号位1，其余位取反</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-1</span><br><span class="line">原码： 1000 0001</span><br><span class="line">反码:  1111 1110  , 最高位不变.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h4><ul>
+<li><p><strong>负数补码存储，符号位不变，正数不变，其余位反码加1，</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">正码</span><br><span class="line">1 , 0000 0001.</span><br><span class="line">反码</span><br><span class="line">-1, 1111,1110.</span><br><span class="line">反码</span><br><span class="line">-1, 1111 1111.</span><br><span class="line"></span><br><span class="line">测试： 求 1，-1 在内存中的16进制值;</span><br><span class="line"></span><br><span class="line">1: 正数无需关心，直接转16进制 = 0x01.</span><br><span class="line"></span><br><span class="line">-1: 反码+1， 原码 1000 0001 ， 反码 ，1111 1110 ， 补码+1 , 1111 1111, 得出内存值 0xff.</span><br><span class="line"></span><br><span class="line">cha x = -1;</span><br><span class="line">输出:</span><br><span class="line">x/1xb 0x7ffeefbff3df</span><br><span class="line">0x7ffeefbff3df: 0xff</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><h4 id="与运算"><a href="#与运算" class="headerlink" title="与运算"></a>与运算</h4><ul>
+<li>**同位为1，结果才是1，否则是0. **</li>
+<li><strong>并且（当2个开关都闭合灯才亮）</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwdq50bglcj30e4089t8n.jpg" alt="image-20211113185951722"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">测试：C: 1 &amp; 2 ，  assembly: and</span><br><span class="line">0000 0001</span><br><span class="line">0000 0010</span><br><span class="line">结果 : 0000 0000; 结果为0；</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="或运算"><a href="#或运算" class="headerlink" title="或运算"></a>或运算</h4><ul>
+<li><strong>同位只要有1，就是1</strong></li>
+<li><strong>或者 (两个开关只要一个开关闭合灯就能亮)</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwdq732jodj30fj08vq2y.jpg" alt="image-20211113190157102"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">测试: C: 1 | 2 , assembly : or</span><br><span class="line">0000 0001</span><br><span class="line">0000 0010</span><br><span class="line">结果为： 0000 0011; 结果为3；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h4><ul>
+<li><strong>同位相反才为1，否则为0</strong></li>
+<li><strong>不一样的时候才为1</strong></li>
+</ul>
+<p><img src="image-20211113191238456.png" alt="image-20211113191238456"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">测试: C: 1 ^ 2 , assembly : xor</span><br><span class="line">0000 0001</span><br><span class="line">0000 0010</span><br><span class="line">结果为： 0000 0011; 结果为3；</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="非运算"><a href="#非运算" class="headerlink" title="非运算"></a>非运算</h4><ul>
+<li><strong>同位交换,单数运算</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">测试: 1 ，C: ~ , assembly : not</span><br><span class="line">0000 0001</span><br><span class="line"></span><br><span class="line">结果为： 1111 1110；</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="左移运算"><a href="#左移运算" class="headerlink" title="左移运算"></a>左移运算</h4><ul>
+<li><strong>各二进制位全部向左移动若干位，高位丢弃，地位补0</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C：&lt;&lt; , assembly : shl</span><br><span class="line"></span><br><span class="line">测试 ： 1，左移1位，</span><br><span class="line">0000 0001 ,结果： 0000 0010； = 2.</span><br><span class="line">左移2；</span><br><span class="line">0000 0001, 结果： 0000 0100； = 4.</span><br><span class="line"></span><br><span class="line">char c = 1 &lt;&lt; 2;</span><br><span class="line">输出为：4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="右移运算"><a href="#右移运算" class="headerlink" title="右移运算"></a>右移运算</h4><ul>
+<li><strong>各二进制位向右移动若干位，无符号高位补0或者有符号高位补1，低位丢弃</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">C：&gt;&gt; , assembly : shr</span><br><span class="line"></span><br><span class="line">测试 ： 1，</span><br><span class="line"></span><br><span class="line">右移1位，</span><br><span class="line">0000 0001 ,结果： 0000 0000； = 0.</span><br><span class="line">右移2；</span><br><span class="line">0000 0001, 结果： 0000 0000； = 0.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">补符号： 高位补1</span><br><span class="line">C：&gt;&gt; , assembly : sar</span><br><span class="line">测试数： 10；右移2位；</span><br><span class="line">0000 1100; 结果： 1000 0011； 负数存的是反码+1， 1111 1101， 内存值= 0xfd;</span><br><span class="line"></span><br><span class="line">1000 1010 -&gt; 1111 0110 补码值 ：0xf6 右移-&gt; 1111 1101; fd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="-1"><a href="#-1" class="headerlink" title="+  - * /"></a>+  - * /</h3><h4 id="-2"><a href="#-2" class="headerlink" title="+"></a>+</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">求 10 + 7 = ？</span><br><span class="line">//混搭伪代码</span><br><span class="line">int a = 10;</span><br><span class="line">int b = 7;</span><br><span class="line"></span><br><span class="line">funcAdd(a,b)</span><br><span class="line">&#123;</span><br><span class="line">	int tem = a ^ b ;</span><br><span class="line">	//转换</span><br><span class="line">	0000 1010 </span><br><span class="line">	0000 0111 </span><br><span class="line">	</span><br><span class="line">	//判断是否有进位 ,</span><br><span class="line">	if(funcCmp!=0)</span><br><span class="line">	&#123;</span><br><span class="line">		//!=0有进位	</span><br><span class="line">		int temp = funcSHL(funcCmp(),1) = 0000 0100;</span><br><span class="line">		a = temp;   </span><br><span class="line">		funcAdd(a,b);</span><br><span class="line">		//第二次对比</span><br><span class="line">		0000 0100</span><br><span class="line">		0000 0111 </span><br><span class="line">		有进位； funcSHL(funcCmp(),1) = 0000 1000;</span><br><span class="line">		//第三次对比 </span><br><span class="line">		0000 1000</span><br><span class="line">		0000 0111</span><br><span class="line">		//无进位，判断执行完毕，执行后面代码</span><br><span class="line">	&#125;</span><br><span class="line">	//无进位 异或结果 = 0000 1111；</span><br><span class="line">	returun a ^ b;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//与运算</span><br><span class="line">funcCmp(a,b)</span><br><span class="line">&#123;</span><br><span class="line">							 0000 1010 </span><br><span class="line">							 			&amp;</span><br><span class="line">							 0000 0111  </span><br><span class="line">							 </span><br><span class="line">		return a&amp;b = 0000 0010;   如果非0，作为返回值继续异或</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//左移1位</span><br><span class="line">funcSHL(int a,int offset)&#123;</span><br><span class="line">	offset = 1;</span><br><span class="line">	return a &lt;&lt; 1 = 0000 0100;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//异或运算</span><br><span class="line">funXor(a,b)</span><br><span class="line">&#123;</span><br><span class="line">			</span><br><span class="line">		// 假设没进位</span><br><span class="line">		return a^b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.010101.cc/2021/11/13/%E6%B1%87%E7%BC%96/" title="汇编之趣味计算机" target="_blank" rel="external">http://www.010101.cc/2021/11/13/汇编/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/with021" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/with021" target="_blank"><span class="text-dark">010101 Decimal is 21, so call me 021(zero to one)</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>记录点滴生活。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/11/13/JVM%E4%B9%8BGC%20Stop%20The%20World%20&%20SafePoint/" title="JVM之GC Stop The World &amp; SafePoint"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,wechat,qq"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipay.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/with021" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/with021" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/with021" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'KrdghyjYV8lbuzvwWV6Hv7p8-gzGzoHsz',
+    appKey: 'Nl2ozIoQVlJ3uK5V7JG7fUMo',
+    placeholder: '来了，老弟，说点啥，say something before you go away...',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
