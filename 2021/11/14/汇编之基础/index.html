@@ -17,10 +17,10 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>汇编基础 | 叫我021吧</title>
+  <title>Win32汇编基础 | 叫我021吧</title>
   <meta name="description" content="汇编基础Wirte by 021.   Leave a message if i messed up ! : )  寄存器32位  提供三种容器寄存器 ： 8 ， 16 ， 32.  64位 提供4中容器寄存器 ：     8 ，16 ，32 ，64.  通用寄存器32位 用户自定义使用寄存器  数据宽度为32位 多余的丢弃  EAX   返回值容器   ECX  REP执行计数器   EDX">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编基础">
+<meta property="og:title" content="Win32汇编基础">
 <meta property="og:url" content="http://www.010101.cc/2021/11/14/%E6%B1%87%E7%BC%96%E4%B9%8B%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="汇编基础Wirte by 021.   Leave a message if i messed up ! : )  寄存器32位  提供三种容器寄存器 ： 8 ， 16 ， 32.  64位 提供4中容器寄存器 ：     8 ，16 ，32 ，64.  通用寄存器32位 用户自定义使用寄存器  数据宽度为32位 多余的丢弃  EAX   返回值容器   ECX  REP执行计数器   EDX">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjs1s1uj31400u0q70.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjw62v7j31400u0tcq.jpg">
 <meta property="article:published_time" content="2021-11-14T02:25:43.000Z">
-<meta property="article:modified_time" content="2021-11-14T11:28:45.845Z">
+<meta property="article:modified_time" content="2021-11-15T04:30:31.155Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary">
@@ -250,7 +250,7 @@
                 <a class="category-link" href="/categories/Assembly/">Assembly</a>
               </p>
               <p class="item-title">
-                <a href="/2021/11/14/%E6%B1%87%E7%BC%96%E4%B9%8B%E5%9F%BA%E7%A1%80/" class="title">汇编基础</a>
+                <a href="/2021/11/14/%E6%B1%87%E7%BC%96%E4%B9%8B%E5%9F%BA%E7%A1%80/" class="title">Win32汇编基础</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-11-14T02:25:43.000Z" itemprop="datePublished">2021-11-14</time>
@@ -333,7 +333,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64%E4%BD%8D"><span class="toc-number">1.1.2.</span> <span class="toc-text">64位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A832%E4%BD%8D"><span class="toc-number">1.1.3.</span> <span class="toc-text">通用寄存器32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.4.</span> <span class="toc-text">非通用寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EIP"><span class="toc-number">1.1.5.</span> <span class="toc-text">EIP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.6.</span> <span class="toc-text">指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.7.</span> <span class="toc-text">内存地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E5%86%85%E5%AD%98%E4%B8%AD%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">往内存中写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">存储模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A0%86%E6%A0%88"><span class="toc-number">1.3.1.</span> <span class="toc-text">堆栈</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64%E4%BD%8D"><span class="toc-number">1.1.2.</span> <span class="toc-text">64位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A832%E4%BD%8D"><span class="toc-number">1.1.3.</span> <span class="toc-text">通用寄存器32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.4.</span> <span class="toc-text">非通用寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EIP"><span class="toc-number">1.1.5.</span> <span class="toc-text">EIP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.6.</span> <span class="toc-text">指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.7.</span> <span class="toc-text">内存地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E5%86%85%E5%AD%98%E4%B8%AD%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">往内存中写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">存储模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A0%86%E6%A0%88"><span class="toc-number">1.3.1.</span> <span class="toc-text">堆栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CALL-%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">CALL()调用函数**</span></a></li></ol></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -347,7 +347,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      汇编基础
+      Win32汇编基础
     </h1>
   
 
@@ -550,6 +550,28 @@
 </ul>
 </li>
 </ul>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><ul>
+<li><strong>JMP调用函数（通常不用）</strong></li>
+</ul>
+<h4 id="CALL-调用函数"><a href="#CALL-调用函数" class="headerlink" title="CALL()调用函数**"></a>CALL()调用函数**</h4><ul>
+<li><strong>基本函数调用流程</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">求 10 + 7 = ？</span><br><span class="line"></span><br><span class="line">10 = 0000 1010 = 0x0a;  7 = 0000 0111 = 0x07;</span><br><span class="line"></span><br><span class="line">模拟入参：</span><br><span class="line">				</span><br><span class="line">初始地址 esp : 0x00000128</span><br><span class="line">        ecx : 0x0000012c</span><br><span class="line">        edx : 0x00000131</span><br><span class="line">				0x00000135  : null;      </span><br><span class="line">0x00000139   	mov ecx 0x0a;</span><br><span class="line">0x0000013D   	mov edx ox07;</span><br><span class="line">   						//加</span><br><span class="line">0x00000142   	add ecx ,edx;</span><br><span class="line">	 						//移动返回值</span><br><span class="line">0x00000146    mov eax, ecx;</span><br><span class="line"></span><br><span class="line">0x0000014a    ret;</span><br><span class="line"></span><br><span class="line">执行调用 call 0x00000139;  首先将 jmp eip ,esp; 然后 mov esp-4, esp; 再执行0x00000139位置;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">函数执行 139 13d 142 系列函数之后到达146 ret返回点，ret首先 jmp eip ,esp; 然后 mov esp+4 ,esp; </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li><strong>堆栈传参</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>堆栈平衡</strong></li>
+</ul>
 
       
     </div>
@@ -559,7 +581,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/14/%E6%B1%87%E7%BC%96%E4%B9%8B%E5%9F%BA%E7%A1%80/" title="汇编基础" target="_blank" rel="external">http://www.010101.cc/2021/11/14/汇编之基础/</a>
+      <a href="http://www.010101.cc/2021/11/14/%E6%B1%87%E7%BC%96%E4%B9%8B%E5%9F%BA%E7%A1%80/" title="Win32汇编基础" target="_blank" rel="external">http://www.010101.cc/2021/11/14/汇编之基础/</a>
     </li>
     
     <li class="post-copyright-license">
