@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwa4xgmz6cj30zj0u041w.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwh9jsumozj30u40aujt0.jpg">
 <meta property="article:published_time" content="2021-11-10T07:15:06.000Z">
-<meta property="article:modified_time" content="2021-11-16T12:28:29.187Z">
+<meta property="article:modified_time" content="2021-11-16T12:32:12.147Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="并发原子锁">
 <meta name="twitter:card" content="summary">
@@ -496,7 +496,9 @@
 <li><p><strong>自旋锁源码</strong></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwh9jsumozj30u40aujt0.jpg" alt="image-20211116201638291"></p>
 </li>
-<li><p><strong>伪代码模拟自选</strong></p>
+</ul>
+<ul>
+<li><p><strong>伪代码模拟自旋锁</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//取锁</span><br><span class="line">tryLock()&#123;</span><br><span class="line"></span><br><span class="line">	boolean flag = lock getLock(); //原子操作, 检查锁，并设置标志位；</span><br><span class="line">	if(!flag)&#123;</span><br><span class="line">		waitiLock();</span><br><span class="line">	&#125;</span><br><span class="line">	return flag;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//自旋等待</span><br><span class="line">waitiLock()&#123;</span><br><span class="line">	boolean flag = checkLock(); //检查锁状态 </span><br><span class="line">	if(flag)&#123;</span><br><span class="line">		tryLock();</span><br><span class="line">	&#125;</span><br><span class="line">	sleep(...);</span><br><span class="line">	waitiLock();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><strong>最常见的原子操作有Compare and Exchange,Self Increase/Decrease等等</strong></p>
