@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Archive | 叫我021吧</title>
+  <title>叫我021吧</title>
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://www.010101.cc/archives/page/2/index.html">
+<meta property="og:url" content="http://www.010101.cc/page/3/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://www.010101.cc/archives/page/2/index.html">
+  <link rel="canonical" href="http://www.010101.cc/page/3/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -318,166 +318,195 @@
 </aside>
 
   
-  
-<main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive</h1>
-	      <p class="text-muted">Total 10 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <main class="main" role="main">
   
   
+    <div class="content">
+  <article id="post-github+hexo" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/08/github+hexo/">免主机，免备案，从0到1教你搭建个人博客(hexo + github page)！</a>
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2021" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2021
-            </a>
-            <!-- <a href="/archives/2021" class="archive-year">2021</a> -->
-          </h3>
-        </div>
-        <div id="collapse2021" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2021">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2021/11/11/JVM%E4%B9%8BGC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E5%88%86%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-11T07:04:04.000Z" itemprop="datePublished">2021-11-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> JVM之GC垃圾回收器与算法深入浅出
-</a>
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/11/08/github+hexo/" class="article-date">
+	  <time datetime="2021-11-08T14:04:58.000Z" itemprop="datePublished">2021-11-08</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a>
+  </span>
 
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/08/github+hexo/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h3 id="原理简介："><a href="#原理简介：" class="headerlink" title="原理简介："></a>原理简介：</h3><h5 id="1-github-page-提供服务和博客文档云端托管"><a href="#1-github-page-提供服务和博客文档云端托管" class="headerlink" title="1.github page 提供服务和博客文档云端托管"></a>1.github page 提供服务和博客文档云端托管</h5><h5 id="2-hexo提供博客页面模板引擎（负责加载md文档并引用渲染到博客主页）"><a href="#2-hexo提供博客页面模板引擎（负责加载md文档并引用渲染到博客主页）" class="headerlink" title="2.hexo提供博客页面模板引擎（负责加载md文档并引用渲染到博客主页）"></a>2.hexo提供博客页面模板引擎（负责加载md文档并引用渲染到博客主页）</h5><h5 id="3-md编辑器负责本地编辑博客内容"><a href="#3-md编辑器负责本地编辑博客内容" class="headerlink" title="3.md编辑器负责本地编辑博客内容"></a>3.md编辑器负责本地编辑博客内容</h5><h5 id="4-git客户端负责push文档到github托管"><a href="#4-git客户端负责push文档到github托管" class="headerlink" title="4.git客户端负责push文档到github托管."></a>4.git客户端负责push文档到github托管.</h5><h5 id="5-github-page-负责显示推送的最新内容"><a href="#5-github-page-负责显示推送的最新内容" class="headerlink" title="5.github page 负责显示推送的最新内容"></a>5.github page 负责显示推送的最新内容</h5><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h4 id="以Mac机器为操作环境-安装步骤本篇不作讲解"><a href="#以Mac机器为操作环境-安装步骤本篇不作讲解" class="headerlink" title="以Mac机器为操作环境, 安装步骤本篇不作讲解."></a>以Mac机器为操作环境, 安装步骤本篇不作讲解.</h4><h4 id="NodeJs"><a href="#NodeJs" class="headerlink" title="NodeJs"></a>NodeJs</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">v12.13.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">hexo version</span><br><span class="line">INFO  Validating config</span><br><span class="line">hexo: 5.4.0</span><br><span class="line">hexo-cli: 4.3.0</span><br><span class="line">os: darwin 20.6.0 11.6</span><br><span class="line"></span><br><span class="line">node: 12.13.1</span><br><span class="line">v8: 7.7.299.13-node.16</span><br><span class="line">uv: 1.33.1</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.39.2</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 1.1.4</span><br><span class="line">http_parser: 2.8.0</span><br><span class="line">openssl: 1.1.1d</span><br><span class="line">cldr: 35.1</span><br><span class="line">icu: 64.2</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br><span class="line">git version 2.23.0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="MarkDown-编辑器"><a href="#MarkDown-编辑器" class="headerlink" title="MarkDown 编辑器"></a>MarkDown 编辑器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博主安装的是 typora.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="操作部署步骤"><a href="#操作部署步骤" class="headerlink" title="操作部署步骤"></a>操作部署步骤</h2><h4 id="1-总流程步骤"><a href="#1-总流程步骤" class="headerlink" title="1.  总流程步骤"></a>1.  总流程步骤</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1,新建博客文档文件夹 ,博主是在桌面 /desktop</span><br><span class="line"></span><br><span class="line">mkdir blog</span><br><span class="line"></span><br><span class="line">2,初始化blog</span><br><span class="line"></span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line">3, 编译环境</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line">4, 本地查看效果</span><br><span class="line">hexo s</span><br><span class="line"></span><br><span class="line">5, 部署github</span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line">6, 清除本地缓存</span><br><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-hexo配置文件环境介绍"><a href="#2-hexo配置文件环境介绍" class="headerlink" title="2. hexo配置文件环境介绍"></a>2. hexo配置文件环境介绍</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># hexo 配置文件，负责博客主题样式加载引导</span><br><span class="line">/blog/_config.yml</span><br><span class="line"></span><br><span class="line"># themes 博客主题文件夹 负责存储主题文件</span><br><span class="line">/blog/themes</span><br><span class="line"></span><br><span class="line"># public 此文件是对外开放的博客文件，也是推送github的文件</span><br><span class="line">/blog/public</span><br><span class="line"></span><br><span class="line"># 资源文件夹 ，负责你写的博客内容给主页加载的md部分，也可以CNAME放在其中这样Push不会被覆盖</span><br><span class="line">/blog/source</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>​        </p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://www.010101.cc/2021/11/08/github+hexo/" title="免主机，免备案，从0到1教你搭建个人博客(hexo + github page)！" target="_blank" rel="external">http://www.010101.cc/2021/11/08/github+hexo/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/with021" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/with021" target="_blank"><span class="text-dark">010101 Decimal is 21, so call me 021(zero to one)</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>记录点滴生活。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+</div>
 
   
-    
-    
-    
-<a href="/2021/11/10/E_Process/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 内核之线程与进程的关系
-</a>
-
 
   
-    
-    
-    
-<a href="/2021/11/10/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8BCAS%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 高并发之CAS自顶向下
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/%E7%BA%BF%E7%A8%8B%E7%AD%89%E5%BE%85%E4%B8%8E%E5%94%A4%E9%86%92/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 线程等待与唤醒之win32内核浅析
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/%E9%AB%98%E5%B9%B6%E5%8F%91%E4%B9%8B%E7%A1%AC%E4%BB%B6%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E4%B8%8ECPU%E5%B1%8F%E9%9A%9C%E6%B5%85%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T07:15:06.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 高并发之硬件MESI缓存一致性协议与CPU屏障浅析
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/win32%E4%B9%8BPE%E6%96%87%E4%BB%B6/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T06:44:58.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> win32 之 PE文件结构解读
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/E_Thread/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T06:44:58.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 线程切换之内核E_thead浅析
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/%E5%8D%9A%E5%AE%A2%E6%A8%A1%E6%9D%BFKPCR/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T06:44:58.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> CPU内核模块之KPCR
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/10/JVM%E4%B9%8BclassLoader%E6%B5%85%E6%9E%90/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-10T06:44:58.000Z" itemprop="datePublished">2021-11-10</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> JVM之Java类加载与自定义加载热更新
-</a>
-
-
-  
-    
-    
-    
-<a href="/2021/11/08/github%20%E8%AE%BF%E9%97%AE%E6%85%A2%EF%BC%8C%E8%80%8C%E5%85%B6%E4%BB%96%E7%BD%91%E9%A1%B5%E6%AD%A3%E5%B8%B8/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-11-08T14:04:58.000Z" itemprop="datePublished">2021-11-08</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> github访问慢，而其他网页正常解决
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	
     
     <nav class="bar bar-footer clearfix" data-stick-bottom>
         <div class="bar-inner">
         <ul class="pager pull-left">
             
             <li class="prev">
-                <a href="/archives/">
+                <a href="/page/2/">
                     <i class="icon icon-angle-left"></i>
                     Prev
                 </a>
             </li>
             
             
-            <li class="next">
-                <a href="/archives/page/3/">
+            <li class="next disabled">
+                <a href="javascript:;">
                     Next
-                    <i class="icon icon-angle-right"></i>
+                    <i class="icon icon-angle-right"></i>                    
                 </a>
             </li>
             
         </ul>
-        <div class="total-article bar-right">Page 2 of 3</div>
+        <div class="total-article bar-right">Page 3 of 3</div>
         </div>
     </nav>
     
- 	
+ 
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -533,6 +562,12 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 <script src="/js/insight.js"></script>
 
 
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
