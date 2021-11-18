@@ -17,21 +17,17 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>C语言基础之麻辣香锅---TODO | 叫我021吧</title>
-  <meta name="description" content="汇编基础Wirte by 021.   Leave a message if i messed up ! : )  寄存器32位  提供三种容器寄存器 ： 8 ， 16 ， 32.  64位 提供4中容器寄存器 ：     8 ，16 ，32 ，64.  通用寄存器32位 用户自定义使用寄存器  数据宽度为32位 多余的丢弃  EAX   返回值容器   ECX  REP执行计数器   EDX">
+  <title>C语言基础之内存分布 | 叫我021吧</title>
+  <meta name="description" content="C语言之内存分布简单分析Wirte by 021.   Leave a message if i messed up ! : )  C源码 | 脑图模拟汇编Win32 win32汇编设计上还是有很多不合理，造成了很多资源浪费，比如断点C的填充，在AT&amp;T的汇编上得到了改良  1234567891011121314151617181920212223242526272829303132333">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C语言基础之麻辣香锅---TODO">
+<meta property="og:title" content="C语言基础之内存分布">
 <meta property="og:url" content="http://www.010101.cc/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83---TODO/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="汇编基础Wirte by 021.   Leave a message if i messed up ! : )  寄存器32位  提供三种容器寄存器 ： 8 ， 16 ， 32.  64位 提供4中容器寄存器 ：     8 ，16 ，32 ，64.  通用寄存器32位 用户自定义使用寄存器  数据宽度为32位 多余的丢弃  EAX   返回值容器   ECX  REP执行计数器   EDX">
+<meta property="og:description" content="C语言之内存分布简单分析Wirte by 021.   Leave a message if i messed up ! : )  C源码 | 脑图模拟汇编Win32 win32汇编设计上还是有很多不合理，造成了很多资源浪费，比如断点C的填充，在AT&amp;T的汇编上得到了改良  1234567891011121314151617181920212223242526272829303132333">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwdkgbq4kgj30jg0cv3zx.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwei5fapk8j30v70syads.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjs1s1uj31400u0q70.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjw62v7j31400u0tcq.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwfyghrzp2j30jf09djrt.jpg">
 <meta property="article:published_time" content="2021-11-14T02:25:43.000Z">
-<meta property="article:modified_time" content="2021-11-18T06:16:32.469Z">
+<meta property="article:modified_time" content="2021-11-18T16:46:36.633Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -203,7 +199,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6/">计算机硬件</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/">测试分类</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6/">计算机硬件</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -213,7 +209,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" rel="tag">PE可执行文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">常见问题解决</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" rel="tag">并发原子锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" rel="tag">操作系统内核</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" rel="tag">树结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/" rel="tag">线性结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" rel="tag">进程&线程</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag">C语言</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" rel="tag">PE可执行文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" rel="tag">工具使用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="tag">常见问题解决</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" rel="tag">并发原子锁</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" rel="tag">操作系统内核</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" rel="tag">树结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B1%87%E7%BC%96/" rel="tag">汇编</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" rel="tag">测试标签</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/" rel="tag">线性结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" rel="tag">进程&线程</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -223,7 +219,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 13px;">C语言</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" style="font-size: 13px;">PE可执行文件</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="font-size: 13px;">工具使用</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 13px;">常见问题解决</a> <a href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" style="font-size: 13.33px;">并发原子锁</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" style="font-size: 13px;">操作系统内核</a> <a href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" style="font-size: 13px;">树结构</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 13.33px;">汇编</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" style="font-size: 13px;">测试标签</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/" style="font-size: 13px;">线性结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" style="font-size: 13.67px;">进程&线程</a>
+      <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 13.33px;">C语言</a> <a href="/tags/JVM/" style="font-size: 14px;">JVM</a> <a href="/tags/PE%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" style="font-size: 13px;">PE可执行文件</a> <a href="/tags/Redis/" style="font-size: 13px;">Redis</a> <a href="/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" style="font-size: 13px;">工具使用</a> <a href="/tags/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" style="font-size: 13px;">常见问题解决</a> <a href="/tags/%E5%B9%B6%E5%8F%91%E5%8E%9F%E5%AD%90%E9%94%81/" style="font-size: 13.33px;">并发原子锁</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/" style="font-size: 13px;">操作系统内核</a> <a href="/tags/%E6%A0%91%E7%BB%93%E6%9E%84/" style="font-size: 13px;">树结构</a> <a href="/tags/%E6%B1%87%E7%BC%96/" style="font-size: 13.33px;">汇编</a> <a href="/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/" style="font-size: 13px;">测试标签</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/" style="font-size: 13px;">线性结构</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 13px;">设计模式</a> <a href="/tags/%E8%BF%9B%E7%A8%8B-%E7%BA%BF%E7%A8%8B/" style="font-size: 13.67px;">进程&线程</a>
     </div>
   </div>
 
@@ -232,7 +228,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">25</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">26</span></li></ul>
     </div>
   </div>
 
@@ -296,7 +292,7 @@
                 <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>
               </p>
               <p class="item-title">
-                <a href="/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83---TODO/" class="title">C语言基础之麻辣香锅---TODO</a>
+                <a href="/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83---TODO/" class="title">C语言基础之内存分布</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-11-14T02:25:43.000Z" itemprop="datePublished">2021-11-14</time>
@@ -308,13 +304,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Assembly/">Assembly</a>
+                <a class="category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>
               </p>
               <p class="item-title">
-                <a href="/2021/11/13/%E6%B1%87%E7%BC%96%E8%B6%A3%E5%91%B3%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="title">汇编之趣味计算机</a>
+                <a href="/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85/" class="title">C语言基础之麻</a>
               </p>
               <p class="item-date">
-                <time datetime="2021-11-13T07:56:26.000Z" itemprop="datePublished">2021-11-13</time>
+                <time datetime="2021-11-14T02:25:43.000Z" itemprop="datePublished">2021-11-14</time>
               </p>
             </div>
           </li>
@@ -334,7 +330,7 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">汇编基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8D"><span class="toc-number">1.1.1.</span> <span class="toc-text">32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#64%E4%BD%8D"><span class="toc-number">1.1.2.</span> <span class="toc-text">64位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A832%E4%BD%8D"><span class="toc-number">1.1.3.</span> <span class="toc-text">通用寄存器32位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.4.</span> <span class="toc-text">非通用寄存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EIP"><span class="toc-number">1.1.5.</span> <span class="toc-text">EIP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">1.1.6.</span> <span class="toc-text">指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.7.</span> <span class="toc-text">内存地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E5%86%85%E5%AD%98%E4%B8%AD%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-number">1.2.</span> <span class="toc-text">往内存中写数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">存储模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A0%86%E6%A0%88"><span class="toc-number">1.3.1.</span> <span class="toc-text">堆栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CALL-%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">CALL()调用函数**</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ESP%E6%A0%88%E9%A1%B6%E5%AF%BB%E5%9D%80"><span class="toc-number">1.3.4.</span> <span class="toc-text">ESP栈顶寻址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EBP%E6%A0%88%E5%BA%95%E5%AF%BB%E5%9D%80"><span class="toc-number">1.3.5.</span> <span class="toc-text">EBP栈底寻址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JCC%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">1.4.</span> <span class="toc-text">JCC指令集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.4.1.</span> <span class="toc-text">标志寄存器</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">C语言之内存分布简单分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E6%BA%90%E7%A0%81-%E8%84%91%E5%9B%BE%E6%A8%A1%E6%8B%9F%E6%B1%87%E7%BC%96Win32"><span class="toc-number">1.1.</span> <span class="toc-text">C源码 | 脑图模拟汇编Win32</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
@@ -348,7 +344,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      C语言基础之麻辣香锅---TODO
+      C语言基础之内存分布
     </h1>
   
 
@@ -388,328 +384,19 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="汇编基础"><a href="#汇编基础" class="headerlink" title="汇编基础"></a>汇编基础</h2><p>Wirte by 021.   Leave a message if i messed up ! : )</p>
+        <h2 id="C语言之内存分布简单分析"><a href="#C语言之内存分布简单分析" class="headerlink" title="C语言之内存分布简单分析"></a>C语言之内存分布简单分析</h2><p>Wirte by 021.   Leave a message if i messed up ! : )</p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwdkgbq4kgj30jg0cv3zx.jpg" alt="汇编语言入门教程- 阮一峰的网络日志"></p>
-<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><h4 id="32位"><a href="#32位" class="headerlink" title="32位"></a>32位</h4><ul>
-<li> <strong>提供三种容器寄存器 ： 8 ， 16 ， 32.</strong></li>
+<h3 id="C源码-脑图模拟汇编Win32"><a href="#C源码-脑图模拟汇编Win32" class="headerlink" title="C源码 | 脑图模拟汇编Win32"></a>C源码 | 脑图模拟汇编Win32</h3><ul>
+<li><strong>win32汇编设计上还是有很多不合理，造成了很多资源浪费，比如断点C的填充，在AT&amp;T的汇编上得到了改良</strong></li>
 </ul>
-<h4 id="64位"><a href="#64位" class="headerlink" title="64位"></a>64位</h4><ul>
-<li><strong>提供4中容器寄存器 ：     8 ，16 ，32 ，64.</strong></li>
-</ul>
-<h4 id="通用寄存器32位"><a href="#通用寄存器32位" class="headerlink" title="通用寄存器32位"></a>通用寄存器32位</h4><ul>
-<li><p><strong>用户自定义使用寄存器</strong></p>
-</li>
-<li><p><strong>数据宽度为32位 多余的丢弃</strong></p>
-<ul>
-<li><p>EAX </p>
-<ul>
-<li><strong>返回值容器</strong></li>
-</ul>
-</li>
-<li><p>ECX</p>
-<ul>
-<li><strong>REP执行计数器</strong></li>
-</ul>
-</li>
-<li><p>EDX</p>
-</li>
-<li><p>EBX</p>
-</li>
-<li><p><strong>ESP</strong></p>
-<ul>
-<li><strong>栈指针寄存器,栈内存起始位置到ESP指针位置为已使用内存</strong></li>
-</ul>
-</li>
-<li><p><strong>EBP</strong></p>
-<ul>
-<li><strong>栈底</strong></li>
-</ul>
-</li>
-<li><p><strong>ESI</strong></p>
-<ul>
-<li><strong>movs 使用</strong></li>
-</ul>
-</li>
-<li><p><strong>EDI</strong></p>
-<ul>
-<li><strong>movs 使用</strong></li>
-</ul>
-</li>
-<li><p><strong>EFL</strong></p>
-<ul>
-<li>内存地址高低方向位</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwei5fapk8j30v70syads.jpg" alt="image-20211114110903790"></p>
-<h4 id="非通用寄存器"><a href="#非通用寄存器" class="headerlink" title="非通用寄存器"></a>非通用寄存器</h4><h4 id="EIP"><a href="#EIP" class="headerlink" title="EIP"></a>EIP</h4><ul>
-<li><strong>cpu下次执行时会找EIP存的值</strong></li>
-</ul>
-<h4 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h4><ul>
-<li><p><strong>mov</strong></p>
-<ul>
-<li><strong>操作数数据宽度需要相同</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mov eax,1 ;  将1存进eax寄存器。</span><br><span class="line">mov ecx,1 ;  将1存进ecx寄存器。</span><br><span class="line">mov eax,ecx ;  将ecx存进eax寄存器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> x64模拟器：</span><br><span class="line">%rax 作为函数返回值使用。</span><br><span class="line">%rsp 栈指针寄存器，指向栈顶</span><br><span class="line">%rdi，%rsi，%rdx，%rcx，%r8，%r9 用作函数参数，依次对应第1参数，第2参数。。。</span><br><span class="line">%rbx，%rbp，%r12，%r13，%14，%15 用作数据存储，遵循被调用者使用规则，简单说就是随便用，调用子函数之前要备份它，以防他被修改</span><br><span class="line">%r10，%r11 用作数据存储，遵循调用者使用规则，简单说就是使用之前要先保存原值</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p><strong>add 加法</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add eax,ecx; 将ecx 与 eax 相加 存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p><strong>sub 减法</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub eax,ecx; 将ecx 与 eax 相减 存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>AND 与运算</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AND eax,ecx; 将ecx 与 eax 与运算 存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>or 或运算</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">or eax,ecx; 将ecx 与 eax 与或算 存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p><strong>xor 异或运算</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xor eax,ecx; 将ecx 与 eax 与异或算 存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>NOT 非运算</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">not eax, 将eax取反 ,存进eax寄存器;</span><br></pre></td></tr></table></figure></li>
-<li><p>**movs 从内存到内存 **</p>
-<ul>
-<li><strong>每复制一次 内存地址自增长当前数据宽度位</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Movs byte ptr es:[edi] , byte ptr ds:[esi]</span><br><span class="line"></span><br><span class="line">Movs byte ptr es:[0x00000000] , byte ptr ds:[0x00000001]</span><br><span class="line"></span><br><span class="line">ELF</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><p><strong>stos 将AI/AX/EAX的值存储到[EDI]指定的内存单元</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">STOS WORD PTR ES:[edi]</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li><strong>REP 重复执行 ，依赖ecx 寄存器的计数器 10进制，每次执行ecx值减一</strong></li>
-</ul>
-<p>​    </p>
-<ul>
-<li><p><strong>JMP 寄存器/立即数/内存</strong></p>
-<ul>
-<li><strong>修改EIP的值</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">jmp dword ptr ds:[eax];  将eax的地址值，赋给EIP,cpu下次执行的将是eax里面的指令.</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>CALL</strong></p>
-<ul>
-<li><p><strong>修改EIP值，再将ESP-4,并将栈顶值压入在ESP-4的地址中</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjs1s1uj31400u0q70.jpg" alt="Untitled 1"></p>
-</li>
-</ul>
-</li>
-<li><p><strong>RET</strong></p>
-<ul>
-<li><p><strong>1，将当前栈顶的值放进EIP中</strong></p>
-</li>
-<li><p><strong>2，将当前ESP指针值+4</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwewjw62v7j31400u0tcq.jpg" alt="Untitled 2"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="内存地址"><a href="#内存地址" class="headerlink" title="内存地址"></a>内存地址</h4><ul>
-<li><p><strong>0x0000000</strong> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据宽度：32位.</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>内存基本单元= 1byte = 8bit</strong></p>
-</li>
-</ul>
-<h3 id="往内存中写数据"><a href="#往内存中写数据" class="headerlink" title="往内存中写数据"></a>往内存中写数据</h3><ul>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov byte ptr ds:[0x00000000] ,1</strong></p>
-</li>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov word ptr ds:[0x00000000] ,1 ; 单字宽度</strong>  </p>
-</li>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov Dword ptr ds:[0x00000000] ,1; 双字宽度</strong> </p>
-</li>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov Dword ptr ds:[0x00000000] ,eax; 将寄存器写入内存</strong> </p>
-</li>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov eax, Dword ptr ds:[0x00000000] ; 将内存写入寄存器</strong> </p>
-</li>
-<li><p><strong>mov 数据宽度 ptr ds:[内存地址] ,值 , mov eax, Dword ptr ds:[ecx+4] ; 将ecx内存地址+4的位置值写入寄存器</strong> </p>
-</li>
-</ul>
-<h3 id="存储模式"><a href="#存储模式" class="headerlink" title="存储模式"></a>存储模式</h3><ul>
-<li><p><strong>小端模式 x86</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据低位在低位，数据高位在高位.</span><br><span class="line"></span><br><span class="line">mov word ptr ds:[0x00000000],0x1a2c ,  0x00000000[1a], 0x00000001[2c]. </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p><strong>大端模式 arm</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据低位在高位，数据高位在低位.</span><br><span class="line"></span><br><span class="line">mov word ptr ds:[0x00000000],0x1a2c ,  0x00000000[2c], 0x00000001[1a]. </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h4><ul>
-<li><p><strong>PUSH压栈</strong></p>
-<ul>
-<li><strong>push指令将数据压入栈中，并移动栈针ESP ,（eps - 数据宽度）</strong></li>
-</ul>
-</li>
-<li><p><strong>pop弹栈</strong></p>
-<ul>
-<li><p><strong>pop指令将数据弹出栈外，并移动栈针ESP ,（eps + 数据宽度)</strong></p>
-</li>
-<li><p><strong>pop eax; 将栈顶的值存入eax中，esp指针 + eax值的数据宽度</strong></p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><ul>
-<li><strong>JMP调用函数（通常不用）</strong></li>
-</ul>
-<h4 id="CALL-调用函数"><a href="#CALL-调用函数" class="headerlink" title="CALL()调用函数**"></a>CALL()调用函数**</h4><ul>
-<li><strong>基本函数调用流程</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">求 10 + 7 = ？</span><br><span class="line"></span><br><span class="line">10 = 0000 1010 = 0x0a;  7 = 0000 0111 = 0x07;</span><br><span class="line"></span><br><span class="line">模拟入参：</span><br><span class="line">				</span><br><span class="line">初始地址 esp : 0x00000128</span><br><span class="line">        ecx : 0x0000012c</span><br><span class="line">        edx : 0x00000131</span><br><span class="line">				0x00000135  : null;      </span><br><span class="line">0x00000139   	mov ecx 0x0a;</span><br><span class="line">0x0000013D   	mov edx ox07;</span><br><span class="line">   						//加</span><br><span class="line">0x00000142   	add ecx ,edx;</span><br><span class="line">	 						//移动返回值</span><br><span class="line">0x00000146    mov eax, ecx;</span><br><span class="line"></span><br><span class="line">0x0000014a    ret;</span><br><span class="line"></span><br><span class="line">执行调用 call 0x00000139;  首先将 jmp eip ,esp; 然后 mov esp-4, esp; 再执行0x00000139位置;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">函数执行 139 13d 142 系列函数之后到达146 ret返回点，ret首先 jmp eip ,esp; 然后 mov esp+4 ,esp; </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//减函数</span><br><span class="line">int sub(int c)&#123;</span><br><span class="line">    return c-1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 加函数</span><br><span class="line">int add(int a , int b)&#123;</span><br><span class="line">    int c = a + b;</span><br><span class="line">    //函数嵌入</span><br><span class="line">    c = sub(c);</span><br><span class="line">    return c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//main函数</span><br><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    </span><br><span class="line">    // insert code here...</span><br><span class="line">    int a = 20;</span><br><span class="line">    int b = 10;</span><br><span class="line">    int c = add(a,b);</span><br><span class="line">    //int a = 7;</span><br><span class="line">    //putchar(a);</span><br><span class="line">    //printf(&quot;Hello, World! %d \n&quot;,c);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">================================模拟汇编堆栈====================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">初始堆栈：</span><br><span class="line"></span><br><span class="line">esp   0x0000 02ff;</span><br><span class="line">ebp   0x0000 0208;</span><br><span class="line">eip   0x0005 0001;</span><br><span class="line"></span><br><span class="line">//预留三个参数寄存器</span><br><span class="line"></span><br><span class="line">esi ....</span><br><span class="line">edi ....</span><br><span class="line">ebx ....</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">============================ main start =====================</span><br><span class="line"></span><br><span class="line">// 1. 提栈</span><br><span class="line">0x0005 0001 ------------   push ebp; |  esp  0x0000 01fb; ebp   0x0000 0208[0x0000 0208]; </span><br><span class="line">0x0005 0002 ------------   mov ebp, esp; |  esp  0x0000 01fb; ebp   0x0000 01fb[0x0000 01fb]; </span><br><span class="line">0x0005 0003 ------------   sub esp, 0x20; |  esp  0x0000 01db; ebp   0x0000 01fb[0x0000 01fb]; </span><br><span class="line"></span><br><span class="line">// 2. 压栈 - 编译环境不一样，编译器优化汇编 可能有一些差异，整体逻辑是不变的, </span><br><span class="line">//   有的环境是直接取寄存器的值，有的直接压值，这里选择压值, </span><br><span class="line">//   win32 压在缓冲区外，AT&amp;T 压在缓冲区内: push 0x14 , ebp - 0x04;</span><br><span class="line">0x0005 0004 ------------   push 0x14; |  esp  0x0000 01d7; ebp   0x0000 01fb[0x0000 01fb]; </span><br><span class="line">0x0005 0005 ------------   push 0x0a; |  esp  0x0000 01d3; ebp   0x0000 01fb[0x0000 01fb]; </span><br><span class="line"></span><br><span class="line">// 3. 函数调用</span><br><span class="line">0x0005 0006 ------------   call 0x0005 000b; |  esp  0x0000 01cf[0x0005 0007]; ebp   0x0000 01fb[0x0000 01fb]; </span><br><span class="line">// 此时 eax = 29; esp  esp  0x0000 01cf; ebp   0x0000 01fb[0x0000 0208]; eax = 29;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 4.恢复堆栈</span><br><span class="line">0x0005 0007 ------------   mov esp, ebp; |  esp  0x0000 01fb; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line">0x0005 0008 ------------   pop ebp; |  esp  0x0000 01ff; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line"></span><br><span class="line">//由于没有选择寄存器传值，压入的两个参数此时不用处理，平栈的方式很多种，这里似乎可以直接平.</span><br><span class="line">//0x0005 0009 ------------   add esp,0x20; |  esp  0x0000 01fb; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line"></span><br><span class="line">0x0005 0009 ------------   ret; |  esp  0x0000 01ff; ebp   0x0000 0208; </span><br><span class="line"></span><br><span class="line">=================================== main end ===============================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 加函数</span><br><span class="line">============================ add start ===================== esp  0x0000 01cf</span><br><span class="line"></span><br><span class="line">0x0005 000b ------------   push ebp - 0x0c ,eax ; |  esp  esp  0x0000 01cb; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line">0x0005 000b ------------   mov ebp, esp ;|  esp  esp  0x0000 01cb; ebp   0x0000 01cb[0x0000 01cb]; </span><br><span class="line"></span><br><span class="line">// 加</span><br><span class="line">0x0005 000c ------------   mov eax , ebp - 0x08; |    esp  0x0000 01cb; ebp   0x0000 01cb[0x0000 01cb]; </span><br><span class="line">0x0005 000d ------------   add eax , ebp - 0x04; |    esp  0x0000 01cb; eax = 30;</span><br><span class="line"></span><br><span class="line">//压参数 </span><br><span class="line">0x0005 000e ------------   push ebp - 0x0c , eax; |  esp  0x0000 01c7; eax = 30;</span><br><span class="line">0x0005 000f ----   call 0x0005 0013 |  esp  esp  0x0000 01c3[0x0005 0000]; ebp   0x0000 01cb[0x0000 01cb]; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 恢复堆栈</span><br><span class="line">0x0005 0000 ------------   pop ebp ; |  esp  esp  0x0000 01c7; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line">0x0005 0011 ------------   add esp,0x08 ; |  esp  0x0000 01cf; ebp   0x0000 01cb[0x0000 01cb]; </span><br><span class="line">0x0005 0012 ------------   ret ; |  esp  0x0000 01f9; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line"></span><br><span class="line">=================================add end====================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 减函数</span><br><span class="line">============================ sub start =====================</span><br><span class="line">// win32汇编并没有使用寄存器传参，此处eax应该使用寄存器，或者EBP寻址;</span><br><span class="line">0x0005 0013 ------------   sub ebp - 0x0c , 0x01;  |  esp  0x0000 01c3; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line">0x0005 0014 ------------   mov eax , ebp - 0x0c;   |  esp  0x0000 01c3; ebp   0x0000 01fb[0x0000 0208]; </span><br><span class="line">0x0005 0015 ------------   ret;   |  esp  0x0000 01c3; ebp   0x0000 01fb[0x0000 0208]; eax = 29;</span><br><span class="line"></span><br><span class="line">============================ sub end =====================</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<ul>
-<li><strong>堆栈函数与平衡</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">求 1 + 2 + 3 + 4 = ？</span><br><span class="line"></span><br><span class="line">0x0000 0117 ; push 4;</span><br><span class="line">0x0000 011b ; push 3;</span><br><span class="line">0x0000 0120 ; push 2;</span><br><span class="line">0x0000 0124 ; push 1;</span><br><span class="line">0x0000 0128 ; add eax, dword ptr ds:[esp+10], 由于压入4个立即数，堆栈地址增加了16，所以将第一个数与eax相加.</span><br><span class="line">............  add eax, dword ptr ds:[esp+0c],</span><br><span class="line">............  add eax, dword ptr ds:[esp+08],</span><br><span class="line">............  add eax, dword ptr ds:[esp+04],</span><br><span class="line">............  ret;</span><br><span class="line"></span><br><span class="line">call 0x0000 0117;</span><br><span class="line"></span><br><span class="line">============================================================================================</span><br><span class="line"></span><br><span class="line">堆栈平衡： </span><br><span class="line">在调用函数中 应该保证函数调用前后，堆栈的一致性不发生变化;</span><br><span class="line">在ret之前 应该保证堆栈指针esp 是call函数压入的esp地址;</span><br><span class="line"></span><br><span class="line">0x0000 0117 ; add eax, dword ptr ds:[0x0000 011b]</span><br><span class="line">0x0000 011b ; push 3;      ------ 此时esp已经发生变化 返回时指向esp的地址和堆栈已经发生变化，再次执行就会出错</span><br><span class="line">0x0000 0120 ; push 2;</span><br><span class="line">0x0000 0124 ; push 1;     </span><br><span class="line">0x0000 0128 ; ret;     ------ ret指令 ：将esp值放到eip，然后将esp的值+4;</span><br><span class="line"></span><br><span class="line">怎么平衡？</span><br><span class="line"></span><br><span class="line">外平栈</span><br><span class="line">call 0x0000 0117; add esp , 0x0c; 将esp复位;</span><br><span class="line"></span><br><span class="line">内平栈</span><br><span class="line">0x0000 0128 ; ret 0x0c;  在函数内部将esp复位;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-
-
-
-<h4 id="ESP栈顶寻址"><a href="#ESP栈顶寻址" class="headerlink" title="ESP栈顶寻址"></a>ESP栈顶寻址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">求 1 + 2 + 3 + 4 = ？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//调用函数 </span><br><span class="line">0x0000 0113 : call 0x0000 0117; 压栈后栈顶指针esp;</span><br><span class="line"></span><br><span class="line">//执行压栈</span><br><span class="line">0x0000 0117 ; push 4;    </span><br><span class="line">0x0000 011b ; push 3;</span><br><span class="line">0x0000 0120 ; push 2;</span><br><span class="line">0x0000 0124 ; push 1;</span><br><span class="line"></span><br><span class="line">//执行相加</span><br><span class="line">0x0000 0128 : add eax , dword ptr ss:[esp+14] ; 执行加第一个数 1；</span><br><span class="line">0x0000 012c : add eax , dword ptr ss:[esp+10] ; 执行加第2个数 2；</span><br><span class="line">0x0000 0130 : add eax , dword ptr ss:[esp+c] ; 执行加第3个数 3；</span><br><span class="line">0x0000 0134 : add eax , dword ptr ss:[esp+8] ; 执行加第4个数 4；</span><br><span class="line">// 平栈  弹出/修正esp位置</span><br><span class="line">0x0000 0130 : pop 1 ;</span><br><span class="line"></span><br><span class="line">pop 1 ~ 4;</span><br><span class="line"></span><br><span class="line">0x0000 0134 : ret;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="EBP栈底寻址"><a href="#EBP栈底寻址" class="headerlink" title="EBP栈底寻址"></a>EBP栈底寻址</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">求 1+2 = ？</span><br><span class="line"></span><br><span class="line">整体步骤，</span><br><span class="line">1： 将参数压栈</span><br><span class="line">2： 调用函数, 2.1 备份esp到ebp, 2.2 开辟新空间， 2.3 复位esp, 2.4弹出备份ebp; 2.5平栈</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">初始堆栈：</span><br><span class="line">esp : 0x0000 0120;</span><br><span class="line">ebp : 0x0000 011c;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//1. 参数压栈</span><br><span class="line">push 2;  esp : 0x0000 0118;   eip :  0x0000 0001;</span><br><span class="line">push 1;  esp : 0x0000 011c;    eip : 0x0000 0002;</span><br><span class="line"></span><br><span class="line">//2. 调用函数</span><br><span class="line">call  0x0000 0005;    esp : 0x0000 0114;   （ eip : 0x0000 0004; 指向下一条指令)</span><br><span class="line">// 下一条的指令;</span><br><span class="line">mov eax,1;			eip : 0x0000 0004;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">==============================================================</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">函数：</span><br><span class="line">1，备份栈底ebp</span><br><span class="line">push ebp;  					esp : 0x0000 0110;     eip : 0x0000 0005;</span><br><span class="line"></span><br><span class="line">2，记录起始ebp的值</span><br><span class="line">mov ebp,esp; 				esp : 0x0000 0110; ebp : 0x0000 0110;      eip : 0x0000 0006;</span><br><span class="line"></span><br><span class="line">3，开辟新空间 开辟16个字节</span><br><span class="line">sub esp,10; 			  esp : 0x0000 0100;                     eip : 0x0000 0007;</span><br><span class="line"></span><br><span class="line">4,执行加操作</span><br><span class="line">add eax ,dword ptr ss:[ebp+c]                         eip : 0x0000 0008;</span><br><span class="line">add eax ,dword ptr ss:[ebp+8] </span><br><span class="line"></span><br><span class="line">5,复位堆栈</span><br><span class="line">mov esp,ebp;     esp : 0x0000 0110; </span><br><span class="line"></span><br><span class="line">pop ebp;  			 esp : 0x0000 0114; </span><br><span class="line"></span><br><span class="line">ret c; 			     esp : 0x0000 0120;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="JCC指令集"><a href="#JCC指令集" class="headerlink" title="JCC指令集"></a>JCC指令集</h3><ul>
-<li><strong>JCC指令根据标志寄存器值的标志位来修改EIP的，从而实现执行跳转</strong></li>
-</ul>
-<h4 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwfyghrzp2j30jf09djrt.jpg" alt="标志寄存器（EFLAGS） - 程序员大本营"></p>
-<ul>
-<li><strong>运算相关指令都会影响标志寄存器</strong></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>JCC指令</th>
-<th>中文含义</th>
-<th>英文原意</th>
-<th>检查符号位</th>
-<th>典型C应用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>JZ/JE</code></td>
-<td>若为0则跳转；若相等则跳转</td>
-<td>jump if zero;jump if equal</td>
-<td><code>ZF=1</code></td>
-<td><code>if (i == j);if (i == 0);</code></td>
-</tr>
-<tr>
-<td><code>JNZ/JNE</code></td>
-<td>若不为0则跳转；若不相等则跳转</td>
-<td>jump if not zero;jump if not equal</td>
-<td><code>ZF=0</code></td>
-<td><code>if (i != j);if (i != 0);</code></td>
-</tr>
-<tr>
-<td><code>JS</code></td>
-<td>若为负则跳转</td>
-<td>jump if sign</td>
-<td><code>SF=1</code></td>
-<td><code>if (i &lt; 0);</code></td>
-</tr>
-<tr>
-<td><code>JNS</code></td>
-<td>若为正则跳转</td>
-<td>jump if not sign</td>
-<td><code>SF=0</code></td>
-<td><code>if (i &gt; 0);</code></td>
-</tr>
-<tr>
-<td><code>JP/JPE</code></td>
-<td>若1出现次数为偶数则跳转</td>
-<td>jump if Parity (Even)</td>
-<td><code>PF=1</code></td>
-<td><code>(null)</code></td>
-</tr>
-<tr>
-<td><code>JNP/JPO</code></td>
-<td>若1出现次数为奇数则跳转</td>
-<td>jump if not parity (odd)</td>
-<td><code>PF=0</code></td>
-<td><code>(null)</code></td>
-</tr>
-<tr>
-<td><code>JO</code></td>
-<td>若溢出则跳转</td>
-<td>jump if overflow</td>
-<td><code>OF=1</code></td>
-<td><code>(null)</code></td>
-</tr>
-<tr>
-<td><code>JNO</code></td>
-<td>若无溢出则跳转</td>
-<td>jump if not overflow</td>
-<td><code>OF=0</code></td>
-<td><code>(null)</code></td>
-</tr>
-<tr>
-<td><code>JC/JB/JNAE</code></td>
-<td>若进位则跳转；若低于则跳转；若不高于等于则跳转</td>
-<td>jump if carry;jump if below;jump if not above equal</td>
-<td><code>CF=1</code></td>
-<td><code>if (i &lt; j);</code></td>
-</tr>
-<tr>
-<td><code>JNC/JNB/JAE</code></td>
-<td>若无进位则跳转；若不低于则跳转；若高于等于则跳转；</td>
-<td>jump if not carry;jump if not below;jump if above equal</td>
-<td><code>CF=0</code></td>
-<td><code>if (i &gt;= j);</code></td>
-</tr>
-<tr>
-<td><code>JBE/JNA</code></td>
-<td>若低于等于则跳转；若不高于则跳转</td>
-<td>jump if below equal;jump if not above</td>
-<td><code>ZF=1或CF=1</code></td>
-<td><code>if (i &lt;= j);</code></td>
-</tr>
-<tr>
-<td><code>JNBE/JA</code></td>
-<td>若不低于等于则跳转；若高于则跳转</td>
-<td>jump if not below equal;jump if above</td>
-<td><code>ZF=0或CF=0</code></td>
-<td><code>if (i &gt; j);</code></td>
-</tr>
-<tr>
-<td><code>JL/JNGE</code></td>
-<td>若小于则跳转；若不大于等于则跳转</td>
-<td>jump if less;jump if not greater equal jump</td>
-<td><code>SF != OF</code></td>
-<td><code>if (si &lt; sj);</code></td>
-</tr>
-<tr>
-<td><code>JNL/JGE</code></td>
-<td>若不小于则跳转；若大于等于则跳转；</td>
-<td>jump if not less;jump if greater equal</td>
-<td><code>SF = OF</code></td>
-<td><code>if (si &gt;= sj);</code></td>
-</tr>
-<tr>
-<td><code>JLE/JNG</code></td>
-<td>若小于等于则跳转；若不大于则跳转</td>
-<td>jump if less equal;jump if not greater</td>
-<td><code>ZF != OF 或 ZF=1</code></td>
-<td><code>if (si &lt;= sj);</code></td>
-</tr>
-<tr>
-<td><code>JNLE/JG</code></td>
-<td>若不小于等于则跳转；若大于则跳转</td>
-<td>jump if not less equal;jump if greater</td>
-<td><code>SF=0F 且 ZF=0</code></td>
-<td><code>if(si&gt;sj)</code></td>
-</tr>
-</tbody></table>
 
       
     </div>
@@ -719,7 +406,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83---TODO/" title="C语言基础之麻辣香锅---TODO" target="_blank" rel="external">http://www.010101.cc/2021/11/14/C语言之内存分布---TODO/</a>
+      <a href="http://www.010101.cc/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83---TODO/" title="C语言基础之内存分布" target="_blank" rel="external">http://www.010101.cc/2021/11/14/C语言之内存分布---TODO/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -771,7 +458,7 @@
     
     
     <li class="next">
-      <a href="/2021/11/13/%E6%B1%87%E7%BC%96%E8%B6%A3%E5%91%B3%E8%AE%A1%E7%AE%97%E6%9C%BA/" title="汇编之趣味计算机"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/11/14/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85/" title="C语言基础之麻"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
