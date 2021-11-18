@@ -17,25 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>JVM之Java对象内存分布 | 叫我021吧</title>
-  <meta name="description" content="Java对象内存分布Wirte by 021. 示例  对象全局图  ​      头部markword">
+  <title>epoll之redis自顶向下 | 叫我021吧</title>
+  <meta name="description" content="Epoll 之 Redis 自行向下Wirte by 021.   Leave a message if i messed up ! : )   IO 进化史BIO阻塞IO Socket阻塞伪代码  12345678910111213141516171819202122232425262728&#x2F;&#x2F;有1000个客户端读文件描述符的需求files waitRead &#x3D; read(fd)*1000;1,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM之Java对象内存分布">
-<meta property="og:url" content="http://www.010101.cc/2021/11/11/JVM%E4%B9%8BJava%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/index.html">
+<meta property="og:title" content="epoll之redis自顶向下">
+<meta property="og:url" content="http://www.010101.cc/2021/11/17/epoll%E4%B9%8Bredis%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Java对象内存分布Wirte by 021. 示例  对象全局图  ​      头部markword">
+<meta property="og:description" content="Epoll 之 Redis 自行向下Wirte by 021.   Leave a message if i messed up ! : )   IO 进化史BIO阻塞IO Socket阻塞伪代码  12345678910111213141516171819202122232425262728&#x2F;&#x2F;有1000个客户端读文件描述符的需求files waitRead &#x3D; read(fd)*1000;1,">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwbbdazz1gj30va0u0gpj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwbataffm6j30k00ct74n.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwbaul5a3lj30k006yjrz.jpg">
-<meta property="article:published_time" content="2021-11-11T07:04:04.000Z">
-<meta property="article:modified_time" content="2021-11-11T09:12:21.631Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwi12adr5aj30e808zgm0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwi0zuuv27j30gt0cbwf3.jpg">
+<meta property="article:published_time" content="2021-11-17T04:16:39.000Z">
+<meta property="article:modified_time" content="2021-11-17T06:24:08.704Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwbbdazz1gj30va0u0gpj.jpg">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwi12adr5aj30e808zgm0.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://www.010101.cc/2021/11/11/JVM%E4%B9%8BJava%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/index.html">
+  <link rel="canonical" href="http://www.010101.cc/2021/11/17/epoll%E4%B9%8Bredis%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -332,21 +331,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83"><span class="toc-number">1.</span> <span class="toc-text">Java对象内存分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">示例</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Epoll-%E4%B9%8B-Redis-%E8%87%AA%E8%A1%8C%E5%90%91%E4%B8%8B"><span class="toc-number">1.</span> <span class="toc-text">Epoll 之 Redis 自行向下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IO-%E8%BF%9B%E5%8C%96%E5%8F%B2"><span class="toc-number">1.1.</span> <span class="toc-text">IO 进化史</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BIO%E9%98%BB%E5%A1%9EIO"><span class="toc-number">1.1.1.</span> <span class="toc-text">BIO阻塞IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO%E5%90%8C%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="toc-number">1.1.2.</span> <span class="toc-text">NIO同步非阻塞</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Select%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%89"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Select（多路复用）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#epoll"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">epoll</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redis-%E5%8D%95%E8%BF%9B%E7%A8%8B-%E5%8D%95%E7%BA%BF%E7%A8%8B-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">redis 单进程 单线程 为什么快？</span></a></li></ol></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-JVM之Java对象内存分布" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-epoll之redis自顶向下" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      JVM之Java对象内存分布
+      epoll之redis自顶向下
     </h1>
   
 
@@ -354,20 +353,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/11/11/JVM%E4%B9%8BJava%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" class="article-date">
-	  <time datetime="2021-11-11T07:04:04.000Z" itemprop="datePublished">2021-11-11</time>
+	<a href="/2021/11/17/epoll%E4%B9%8Bredis%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" class="article-date">
+	  <time datetime="2021-11-17T04:16:39.000Z" itemprop="datePublished">2021-11-17</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java/">Java</a>
+    <a class="article-category-link" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%86%85%E6%A0%B8/">操作系统内核</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/JVM/" rel="tag">JVM</a>
+	<a class="article-tag-link-link" href="/tags/Redis/" rel="tag">Redis</a>
   </span>
 
 
@@ -380,23 +379,59 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/11/JVM%E4%B9%8BJava%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/11/17/epoll%E4%B9%8Bredis%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="Java对象内存分布"><a href="#Java对象内存分布" class="headerlink" title="Java对象内存分布"></a>Java对象内存分布</h2><p>Wirte by 021.</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwbbdazz1gj30va0u0gpj.jpg" alt="image-20211111165741691"></p>
-<ul>
-<li><strong>对象全局图</strong></li>
+        <h2 id="Epoll-之-Redis-自行向下"><a href="#Epoll-之-Redis-自行向下" class="headerlink" title="Epoll 之 Redis 自行向下"></a>Epoll 之 Redis 自行向下</h2><p>Wirte by 021.   Leave a message if i messed up ! : )</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwi12adr5aj30e808zgm0.jpg" alt="LINUX – IO MULTIPLEXING – SELECT VS POLL VS EPOLL | Byte_Liu&#39;s Blog"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwi0zuuv27j30gt0cbwf3.jpg" alt="Redis系统架构- 知乎"></p>
+<h3 id="IO-进化史"><a href="#IO-进化史" class="headerlink" title="IO 进化史"></a>IO 进化史</h3><h4 id="BIO阻塞IO"><a href="#BIO阻塞IO" class="headerlink" title="BIO阻塞IO"></a>BIO阻塞IO</h4><ul>
+<li><strong>Socket阻塞伪代码</strong></li>
 </ul>
-<p>​    <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwbataffm6j30k00ct74n.jpg" alt="img"></p>
-<ul>
-<li><p><strong>头部markword</strong></p>
-<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwbaul5a3lj30k006yjrz.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//有1000个客户端读文件描述符的需求</span><br><span class="line">files waitRead = read(fd)*1000;</span><br><span class="line"></span><br><span class="line">1, file = read(waitRead[0]);</span><br><span class="line"></span><br><span class="line">2, if(file != null)</span><br><span class="line">	&#123;</span><br><span class="line">		//do work</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">//单线程阻塞， 只能使用多线程处理, 每一条线程处理一个文件描述符的读取系统调用</span><br><span class="line"></span><br><span class="line">new Thread(</span><br><span class="line"></span><br><span class="line">files waitRead = read(fd)*1000;</span><br><span class="line"></span><br><span class="line">1, file = read(waitRead[0]);</span><br><span class="line"></span><br><span class="line">2, if(file != null)</span><br><span class="line">	&#123;</span><br><span class="line">		//do work</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">).start();</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="NIO同步非阻塞"><a href="#NIO同步非阻塞" class="headerlink" title="NIO同步非阻塞"></a>NIO同步非阻塞</h4><ul>
+<li>同步非阻塞伪代码模拟**</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//有1000个读文件描述符的需求</span><br><span class="line">read(int fd) * 1000;</span><br><span class="line"></span><br><span class="line">for(;;)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	for(1000 * fd)        				// 用户空间 系统调用轮询1000次， </span><br><span class="line">	&#123;</span><br><span class="line">		file = read(fd1~fd1000);   //轮询读取每一个fd文件描述符，不管数据有没有准备好</span><br><span class="line">		</span><br><span class="line">		if(file != null)</span><br><span class="line">		&#123;</span><br><span class="line">		// do work....</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Select（多路复用）"><a href="#Select（多路复用）" class="headerlink" title="Select（多路复用）"></a>Select（多路复用）</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//有1000个读文件描述符的需求</span><br><span class="line">read(int fd) * 1000;</span><br><span class="line"></span><br><span class="line">//select 系统调用函数， 一次性传输多个文件描述符传输给内核，返回准备好的文件描述;</span><br><span class="line">select(fd*1000);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	file fds = select(fd*1000);    // 系统调用，内核返回准备好的文件的描述符</span><br><span class="line">	for( 0;fds; )        					 // 用户空间遍历内核返回的全部文件描述符，</span><br><span class="line">	&#123;</span><br><span class="line">	</span><br><span class="line">		if(fd.readAble)              //检测文件可读状态</span><br><span class="line">		&#123;</span><br><span class="line">		</span><br><span class="line">				file = read(fd);        </span><br><span class="line">				if(file != null)</span><br><span class="line">				&#123;</span><br><span class="line">					// do work....</span><br><span class="line">				&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h5><ul>
+<li><p><strong>模拟内核 和 用户 共享空间逻辑</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">模拟原始内存空间：</span><br><span class="line"></span><br><span class="line">0xffffffff ------------用户空间-------------0x80000000 ------------内核空间------------ 0x00000000;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">模拟共享空间：   //用户与内核 映射 同一块物理空间</span><br><span class="line"></span><br><span class="line">0xffffffff ---------用户空间---------[0x80000000 ---共享空间--- 0x700000000 ]------内核空间----- 0x00000000;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 共享空间容器</span><br><span class="line">1，红黑树 - 等待读取的文件描述符 ,btree;</span><br><span class="line">2，链表 - 准备好的文件描述符  , readyLinkList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">btree.add(epoll.creat(fd));   // 将待读取的文件描述符 放入共享空间的红黑树.</span><br><span class="line"></span><br><span class="line">file = read(readyLinkList(fd));    //读取 共享空间 链表容器 已准备好的文件描述符；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="redis-单进程-单线程-为什么快？"><a href="#redis-单进程-单线程-为什么快？" class="headerlink" title="redis 单进程 单线程 为什么快？"></a>redis 单进程 单线程 为什么快？</h4><ul>
+<li><strong>如何保证顺序性？</strong><ul>
+<li><strong>每个连接</strong></li>
+<li></li>
+</ul>
 </li>
 </ul>
+<ul>
+<li><strong>sendfile 零拷贝</strong></li>
+<li></li>
+</ul>
+<p>​    </p>
 
       
     </div>
@@ -406,7 +441,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://www.010101.cc/2021/11/11/JVM%E4%B9%8BJava%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83/" title="JVM之Java对象内存分布" target="_blank" rel="external">http://www.010101.cc/2021/11/11/JVM之Java对象内存分布/</a>
+      <a href="http://www.010101.cc/2021/11/17/epoll%E4%B9%8Bredis%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B/" title="epoll之redis自顶向下" target="_blank" rel="external">http://www.010101.cc/2021/11/17/epoll之redis自顶向下/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -452,13 +487,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2021/11/11/JVM%E4%B9%8BGC%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%B5%85%E6%9E%90/" title="JVM之GC垃圾回收器与算法深入浅出"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2021/11/11/JVM%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BATODO/" title="JVM之Java运行时数据区浅析---TODO"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/11/15/WIN32%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/" title="WIN32之保护模式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
