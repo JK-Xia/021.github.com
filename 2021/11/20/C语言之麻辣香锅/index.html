@@ -30,11 +30,11 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwllgk36qbj30u006jq3a.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwlmoqt3m2j30xm0htmyh.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwmokvwjbbj31c00u0tfq.jpg">
-<meta property="og:image" content="http://www.010101.cc/2021/11/20/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85/%E6%88%AA%E5%B1%8F2021-11-21%20%E4%B8%8B%E5%8D%8812.55.19.png">
-<meta property="og:image" content="http://www.010101.cc/2021/11/20/C%E8%AF%AD%E8%A8%80%E4%B9%8B%E9%BA%BB%E8%BE%A3%E9%A6%99%E9%94%85/%E6%88%AA%E5%B1%8F2021-11-20%20%E4%B8%8B%E5%8D%889.28.18.png">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwnxt1zedlj31c00u0dqi.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwnxsxz7e7j31c00u0n40.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gwlxtiksvoj31c00u0dpm.jpg">
 <meta property="article:published_time" content="2021-11-19T19:08:02.000Z">
-<meta property="article:modified_time" content="2021-11-22T06:56:42.396Z">
+<meta property="article:modified_time" content="2021-11-22T07:03:31.558Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="C语言">
 <meta name="twitter:card" content="summary">
@@ -463,11 +463,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">模拟代码逻辑:</span><br><span class="line"></span><br><span class="line">int minCase = 1; 最小的条件语句</span><br><span class="line"></span><br><span class="line">int maxCase = 9; 最大</span><br><span class="line"></span><br><span class="line">int myCondition = 1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//最小值处理，如果小于最小值直接不符合case区间，也会直接走default;</span><br><span class="line">if(myCondition &lt; minCase) 如果大于最大值；直接跳默认值</span><br><span class="line">&#123;		</span><br><span class="line">		// Jcc跳转</span><br><span class="line">		jmp default;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">最大值处理，如果大于最大值直接不符合case区间，直接走default;</span><br><span class="line">if(myCondition &gt; maxCase) 如果大于最大值；直接跳默认值</span><br><span class="line">&#123;		</span><br><span class="line">		// Jcc跳转</span><br><span class="line">		jmp default;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//连续case区间逻辑跳转，参数数组内存存储,编译器优化连续case，利用偏移量找位置</span><br><span class="line">if((myCondition - minCase)*4的内存地址) </span><br><span class="line">&#123;		</span><br><span class="line">		如果条件为1 ； 1-1 = 0 ； 0 * 4 = 0 ；跳转到索引表第0个，一次类推，这个表的算法是编译器优化的，</span><br><span class="line">		jmp addresstable;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwmokvwjbbj31c00u0tfq.jpg" alt="截屏2021-11-21 下午12.55.12"></p>
-<p><img src="%E6%88%AA%E5%B1%8F2021-11-21%20%E4%B8%8B%E5%8D%8812.55.19.png" alt="截屏2021-11-21 下午12.55.19"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwnxt1zedlj31c00u0dqi.jpg" alt="截屏2021-11-21 下午12.55.19"></p>
 <ul>
 <li><strong>在case区间大的时候 switch 无法优化</strong></li>
 </ul>
-<p><img src="%E6%88%AA%E5%B1%8F2021-11-20%20%E4%B8%8B%E5%8D%889.28.18.png" alt="截屏2021-11-20 下午9.28.18"></p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwnxsxz7e7j31c00u0n40.jpg" alt="截屏2021-11-20 下午9.28.18"></p>
 <p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwlxtiksvoj31c00u0dpm.jpg" alt="截屏2021-11-20 下午9.29.41"></p>
 
       
